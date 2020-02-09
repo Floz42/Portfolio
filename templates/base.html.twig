@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="author" content="Florian THIEBAUD" />
+        <meta name="copyright" content="©2019 Floz " />
+        <meta name="description" content="Bienvenue sur mon site. Vous pourrez ici me découvrir à ravers un CV dynamique et mon Portfolio." />
+        <meta name="keywords" content="developper,développeur,web,php,poo,symfony,backend,france,loire,lyon,saint-etienne" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Floz Workshop !" />
+        <meta property="og:type" content="website" />
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="shortcut icon" href="" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>{% block title %}Floz Workshop !{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <header>
+            <div id="navbar" class="container-fluid">
+                <img id="logo1" src="{{ asset('/images/logo.png') }}" width="130" height="130" alt="logo">
+                <div></div>
+                <ul class="row">
+                    <a href=""><li>ACCUEIL</li></a>
+                    <a href=""><li>MON CV</li></a>
+                    <a href=""><li>MES COMPÉTENCES</li></a>
+                    <a href=""><li>MON PORTFOLIO</li></a>
+                </ul>
+            </div>
+        </header>
+        <div id="presentation" class="container-fluid">
+            <h1 class="title_presentation">
+                DÉVELOPPEUR WEB JUNIOR
+            </h1>
+        </div>
+        <div class="container">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="{{ asset('/js/main.js') }}"></script>
+        <script src="{{ asset('/js/Effects.js') }}"></script>
+
     </body>
 </html>
+

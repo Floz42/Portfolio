@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "OpenclassRooms",
+			"path": "/Users/flo/Documents/OpenclassRooms"
+		},
+		{
+			"path": "/Users/flo/Documents/P3_THIEBAUD_FLORIAN/P3_01_codesource"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.twig": "html"
+		}
+	}
+}

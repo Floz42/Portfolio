@@ -1,0 +1,94 @@
+/************** GENERAL **************/
+
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bangers&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/************** NAVBAR **************/
+
+#logo {
+    font-family: 'Bangers';
+    font-size: 5vw;
+    color: #5cadd3;
+}
+
+#navbar {
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    top: 0; 
+    background-color: rgb(54, 54, 54);
+    z-index: 1000;
+    position : fixed;
+}
+
+#navbar ul {
+    display: flex; 
+    margin-top: 2vw;
+    font-size: 1.25vw;
+}
+
+#navbar ul li {
+    margin: 1vw;
+}
+
+#navbar ul a {
+    text-decoration: none;
+    color: white;
+    padding-right: 1vw;
+}
+
+#navbar ul a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #5cadd3;
+    transition: width 0.3s;
+}
+
+#navbar ul a:hover::after {
+    width: 100%;
+    transition: width 0.3s;
+}
+
+#navbar ul a:hover {
+    color: #5cadd3;
+    transition: color 1s;
+}
+
+#logo1 {
+    position: absolute;
+    margin-top: 2vw;
+}
+
+/************** PRESENTATION **************/
+#presentation {
+    margin-top: 100px;
+    width:100%;
+    height: 100%;
+    height: 10vw;
+    background-image: url(https://www.tekoway.com/wp-content/uploads/2019/04/developper-votre-application-web-avec-des-frameworks@2x-80-1200x798.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100%;
+    padding: 0;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+
+.title_presentation {
+    font-weight: 800;
+}
+
