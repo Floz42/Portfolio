@@ -67,16 +67,18 @@ ul {
 
 #logo1 {
     position: absolute;
-    margin-top: 2vw;
+    width: 10vw; 
+    height: auto;
+    top: 0.6vw;
 }
 
 /************** PRESENTATION **************/
 #presentation {
-    margin-top: 100px;
+    margin-top: 90px;
     width:100%;
     height: 100%;
-    height: 10vw;
-    background-image: url(https://www.tekoway.com/wp-content/uploads/2019/04/developper-votre-application-web-avec-des-frameworks@2x-80-1200x798.jpg);
+    height: auto;
+    background-color: black; /* url(https://www.tekoway.com/wp-content/uploads/2019/04/developper-votre-application-web-avec-des-frameworks@2x-80-1200x798.jpg);*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -87,8 +89,67 @@ ul {
     justify-content: center;
 }
 
+#presentation_card {
+    display:flex; 
+    flex-direction: column;
+    border-top: 10px solid rgb(92, 173, 211);
+    border-bottom: 10px solid rgb(92, 173, 211);
+    z-index: 10;
+    border-radius: 25px;
+    padding: 3vw;
+    margin: 10vw;
+}
+
+#presentation_card2 {
+    width: 400px;
+    display:flex; 
+    flex-wrap: nowrap;
+    flex-direction: column;
+    position: absolute;
+    border-top: 10px solid rgb(92, 173, 211);
+    border-bottom: 10px solid rgb(92, 173, 211);
+    border-radius: 25px;
+    padding: 3vw;
+    opacity: 0;
+}
+
 
 .title_presentation {
     font-weight: 800;
+    font-size: 3vw;
+    color: rgb(92, 173, 211);
 }
 
+.title_presentation:hover {
+    color: rgb(92, 173, 211, 0.5);
+}
+
+.text_presentation {
+    color: white;
+    font-size: 1.5vw;
+    font-style: italic;
+}
+
+.photo_profil {
+    width: 100px;
+    height: auto; 
+    border-radius: 50%;
+}
+
+.text_presentation2 {
+    color: white;
+    font-size: 1vw;
+    font-style: italic;
+}
+
+.profil {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.profil h2 {
+    margin-left: 1vw;
+    color: rgb(92, 173, 211);
+    font-weight: bold;
+}

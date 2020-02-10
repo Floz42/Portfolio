@@ -10,6 +10,7 @@
         <meta property="og:title" content="Floz Workshop !" />
         <meta property="og:type" content="website" />
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <link rel="shortcut icon" href="" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -19,7 +20,7 @@
     <body>
         <header>
             <div id="navbar" class="container-fluid">
-                <img id="logo1" src="{{ asset('/images/logo.png') }}" width="130" height="130" alt="logo">
+                <img id="logo1" src="{{ asset('/images/logo.png') }}" class="img-fluid" alt="logo">
                 <div></div>
                 <ul class="row">
                     <a href=""><li>ACCUEIL</li></a>
@@ -30,9 +31,25 @@
             </div>
         </header>
         <div id="presentation" class="container-fluid">
-            <h1 class="title_presentation">
-                DÉVELOPPEUR WEB JUNIOR
-            </h1>
+            <div id="presentation_card">
+                <h1 class="animated bounceInDown title_presentation">
+                Florian Thiébaud
+                </h1>
+                <p class="animated bounceInUp text_presentation">
+                   Développeur Web Junior
+                </p>
+                <input type="button" value="Contact" class="btn_contact col-4 btn btn-outline-info">
+            </div>
+            <div id="presentation_card2">
+                <div class="profil">
+                    <img class="photo_profil" src="{{ asset('images/profil.jpeg')}}" alt="">
+                    <h2><span class="text-white">&lt</span> Bonjour <span class="text-white">&gt</span></h2>
+                </div>
+                <p class="mt-2 animated bounceInUp text_presentation2">
+                   Fraîchement diplômé de la formation DWJ d'OpenClassRooms, j'ai une forte appétence pour les langages backend et notamment Symfony, tout en m'intéressant aux langages frontend.
+                </p>
+                <input type="button" value="Contact" class="btn_contact col-4 btn btn-outline-info">
+            </div>
         </div>
         <div class="container">
             {% block body %}{% endblock %}
@@ -47,3 +64,12 @@
     </body>
 </html>
 
+<script>
+    $('#presentation_card').hover( function(){
+        $(this).addClass('animated  bounceOutRight');
+        setTimeout(function() {
+            $('#presentation_card2').css('opacity', '1');
+            $('#presentation_card2').addClass('animated bounceInRight');
+        },1000);
+    })
+</script>
