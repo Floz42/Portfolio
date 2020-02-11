@@ -10,6 +10,7 @@
         <meta property="og:title" content="Floz Workshop !" />
         <meta property="og:type" content="website" />
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/breakpoints.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <link rel="shortcut icon" href="" />
@@ -38,17 +39,39 @@
                 <p class="animated bounceInUp text_presentation">
                    Développeur Web Junior
                 </p>
-                <input type="button" value="Contact" class="btn_contact col-4 btn btn-outline-info">
+                <input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-12">
             </div>
             <div id="presentation_card2">
                 <div class="profil">
-                    <img class="photo_profil" src="{{ asset('images/profil.jpeg')}}" alt="">
-                    <h2><span class="text-white">&lt</span> Bonjour <span class="text-white">&gt</span></h2>
-                </div>
+                    <img class="photo_profil" src="{{ asset('images/profil.jpeg')}}" alt="profil">
+                    <h2 class="title_presentation2"><span class="text-white">&lt</span> Bonjour <span class="text-white">&gt</span></h2>
+                </div> 
                 <p class="mt-2 animated bounceInUp text_presentation2">
                    Fraîchement diplômé de la formation DWJ d'OpenClassRooms, j'ai une forte appétence pour les langages backend et notamment Symfony, tout en m'intéressant aux langages frontend.
                 </p>
-                <input type="button" value="Contact" class="btn_contact col-4 btn btn-outline-info">
+                <input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-12">
+            </div>
+        </div>
+        <div class="container mt-3" id="introduce_me">
+            <div class="col-8 m-auto">
+                <h2 class="text-center section_title mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">PRÉSENTATION :</h2>
+                <p class="introduce_text">
+                    Après un parcours atypique, une Licence STAPS, divers rôles dans l'événementiel et l'achat d'un fond de commerce, je décide à 31ans de revenir à mon premier amour qui est le développement via la formation "Développeur Web Junior" d'OpenClassrooms en octobre 2019.
+                    <br><hr>
+                    À travers cette formation je découvre dans un premier temps les langages frontend (HTML, CSS, JS), tout en apprenant à développer en orienté objet. Puis ma préférence se tourne sur les langages backend (PHP, framework Symfony)
+                </p>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <h2 class="section_title text-center"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">MON CV :</h2>
+            <div class="row mt-3">
+                <div id="buttons_cv" class="col-3">
+                    <a href=""><input class="btn btn-primary" type="button" value="INFORMATIONS"></a>
+                    <a href=""><input class="btn btn-success" type="button" value="DIPLÔMES"></a>
+                    <a href=""><input class="btn btn-danger" type="button" value="COMPÉTENCES"></a>
+                    <a href=""><input class="btn btn-warning" type="button" value="EXPÉRIENCES"></a>
+                    <a href=""><input class="btn btn-info" type="button" value="SOFT SKILLS"></a>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -65,11 +88,5 @@
 </html>
 
 <script>
-    $('#presentation_card').hover( function(){
-        $(this).addClass('animated  bounceOutRight');
-        setTimeout(function() {
-            $('#presentation_card2').css('opacity', '1');
-            $('#presentation_card2').addClass('animated bounceInRight');
-        },1000);
-    })
+
 </script>

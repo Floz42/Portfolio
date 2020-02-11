@@ -1,0 +1,11 @@
+@media all and (max-width: 425px) {
+    #presentation {
+        margin-top: 30px;
+    }
+}
+
+@media all and (max-width: 768px) {
+    #presentation {
+        margin-top: 50px;
+    }
+}

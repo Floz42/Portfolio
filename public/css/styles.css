@@ -1,11 +1,32 @@
 /************** GENERAL **************/
 
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Bangers&display=swap');
 
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins-regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url("../fonts/Poppins-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Thin";
+    src: url("../fonts/Poppins-Thin.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Poppins-Light";
+    src: url("../fonts/Poppins-Light.ttf") format("truetype");
+}
+
 body {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: "Poppins" !important;
     text-decoration: none;
+    overflow-x: hidden;
+    font-size: 2vw;
 }
 
 ul {
@@ -101,7 +122,7 @@ ul {
 }
 
 #presentation_card2 {
-    width: 400px;
+    width: 40%;
     display:flex; 
     flex-wrap: nowrap;
     flex-direction: column;
@@ -131,15 +152,17 @@ ul {
 }
 
 .photo_profil {
-    width: 100px;
+    width: 9vw;
     height: auto; 
     border-radius: 50%;
 }
-
+.title_presentation2 {
+    font-size: 2vw;
+}
 .text_presentation2 {
     color: white;
-    font-size: 1vw;
-    font-style: italic;
+    font-size: 1.5vw;
+    font-family: 'Poppins-Thin';
 }
 
 .profil {
@@ -152,4 +175,30 @@ ul {
     margin-left: 1vw;
     color: rgb(92, 173, 211);
     font-weight: bold;
+}
+
+/************** INTRODUCE ME **************/
+
+#introduce_me {
+    background-color: rgb(192, 192, 192, 0.5);
+    border-radius: 2vw;
+    padding: 3vw;
+}
+
+.section_title {
+    font-family: 'Poppins-Bold';
+    color: rgb(92, 173, 211);
+    font-size: 3vw;
+}
+
+/************** CV **************/
+
+#buttons_cv {
+    display: flex; 
+    flex-direction: column;
+}
+
+#buttons_cv .btn {
+    width: 150px;
+    margin: 1vw;
 }
