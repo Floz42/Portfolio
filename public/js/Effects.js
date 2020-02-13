@@ -5,6 +5,7 @@ class Effects {
         this.logo_hover();
         this.presentation_card();
         this.show_logo_cv();
+        this.hide_logo_cv();
     }
 
     logo_hover() {
@@ -29,5 +30,11 @@ class Effects {
         $(window).scroll(function() {
             $('#download_cv').css('animation', 'opacity 2s forwards');
         });    
+    }
+
+    hide_logo_cv() {
+        $('#download_cv').on('click', function() {
+            $(this).hide("slow");
+        });
     }
 }

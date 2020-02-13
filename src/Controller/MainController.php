@@ -16,62 +16,59 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function index(CVInfosRepository $repository)
+    public function index()
     {
-        $infos = $repository->find(2);
-
-        return $this->render('main/cv/infos.html.twig', [
-            'infos' => $infos
-        ]);
+        return $this->render('main/cv/accueil.html.twig');
     }
 
     /**
-     * @Route("/cv_infos", name="cv_infos")
-     */
-    public function cv_infos(CVInfosRepository $repository)
-     {
-        $infos = $repository->find(2);
-
-        return $this->render('main/cv/infos.html.twig', [
-            'infos' => $infos
-        ]);
-    }
-
-    /**
-     * @Route("/cv_diplomes", name="cv_diplomes")
+     * @Route("/diplomes_ajax", name="diplomes_ajax")
      */
     public function cv_diplomes(CVDiplomesRepository $repository)
     {
         $diplomes = $repository->findAll();
 
-        return $this->render('main/cv/diplomes.html.twig', [
+        return $this->render('main/cv/diplomes_ajax.html.twig', [
             'diplomes' => $diplomes
         ]);
     }
 
     /**
-     * @Route("/cv_experiences", name="cv_experiences")
+     * @Route("/experiences_ajax", name="experiences_ajax")
      */
-    public function cv_experiences(CVExperiencesRepository $repository)
+    public function experiences_ajax(CVExperiencesRepository $repository)
     {
         $xp = $repository->findAll();
 
-        return $this->render('main/cv/experiences.html.twig', [
+        return $this->render('main/cv/experiences_ajax.html.twig', [
             'xps' => $xp
         ]);
     }
 
     /**
-     * @Route("/cv_softskills", name="cv_soft_skills")
+     * @Route("/softskills_ajax", name="softskills_ajax")
      */
-    public function cv_soft_skills(CVSoftSkillsRepository $repository)
+    public function softskills_ajax(CVSoftSkillsRepository $repository)
     {
 
         $softskills = $repository->findAll();
 
-        return $this->render('main/cv/soft_skills.html.twig', [
+        return $this->render('main/cv/softskills_ajax.html.twig', [
             "softskills" => $softskills
         ]);
     }
+
+    /**
+     * @Route("/infos_ajax", name="infos_ajax")
+     */
+     public function infos_ajax(CVInfosRepository $repository) 
+     {
+        $infos = $repository->find(2);
+
+        return $this->render('main/cv/infos_ajax.html.twig', [
+            'infos' => $infos
+        ]);
+     }
+
 
 }

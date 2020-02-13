@@ -70,13 +70,12 @@
             <h2 class="section_title text-center"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">MON CV :</h2>
             <div class="row mt-3">
                 <div id="buttons_cv" class="col-md-3 col-xs-12">
-                    <a class="col-xs-6" href="{{ path('cv_infos')}}"><input class="btn btn-primary" type="button" value="INFORMATIONS"></a>
-                    <a class="col-xs-6" href="{{ path('cv_diplomes')}}"><input class="btn btn-success" type="button" value="DIPLÔMES"></a>
-                    <a class="col-xs-6" href="{{ path('cv_experiences')}}"><input class="btn btn-warning" type="button" value="EXPÉRIENCES"></a>
-                    <a class="col-xs-6" href="{{ path('cv_soft_skills')}}"><input class="btn btn-info" type="button" value="SOFT SKILLS"></a>
+                    <input id="button_infos" class="btn btn-primary" type="button" value="INFORMATIONS">
+                    <input id="button_diplomes" class="btn btn-success" type="button" value="DIPLÔMES">
+                    <input id="button_experiences" class="btn btn-warning" type="button" value="EXPÉRIENCES">
+                    <input id="button_skills" class="btn btn-info" type="button" value="SOFT SKILLS">
                 </div>
-                <div class="col-9 m-auto">
-                    {% block cv %} {% endblock %}
+                <div id="cv_ajax" class="col-md-8 col-xs-12 m-auto">
                 </div>
             </div>
         </div>
@@ -96,6 +95,8 @@
         <script src="{{ asset('/js/main.js') }}"></script>
         <script src="{{ asset('/js/Effects.js') }}"></script>
         <script src="{{ asset('/js/CVFlo.js') }}"></script>
+        <script src="{{ asset('/js/Ajax.js') }}"></script>
+
 
 
     </body>
