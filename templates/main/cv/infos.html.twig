@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block cv %}
+    <div class="row align-items-center p-auto">
+        <div class="col-3">
+            <img src="{{ asset('/images/' ~ infos.picture)}}" alt="profil" class="cv_infos_picture">
+        </div>
+        <div class="col-9 text-center">
+            <h2 class="section_title">
+                {{ infos.name }}
+                {{ infos.lastname }}
+            </h2>
+            <h5>
+                <i class="blue_icon fas fa-user"></i> Age : {{ infos.age }} ans
+            </h5>
+            <h5>
+                <i class="blue_icon fas fa-phone"></i> Téléphone : {{ infos.phone }} 
+            </h5>
+            <h5>
+                <i class="blue_icon far fa-envelope"></i> E-mail : {{ infos.email }} 
+            </h5>
+
+        </div>
+    </div>
+
+{% endblock %}

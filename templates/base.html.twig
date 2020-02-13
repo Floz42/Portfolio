@@ -31,6 +31,10 @@
                 </ul>
             </div>
         </header>
+            <div id="download_cv">
+                CV
+                <i class="fas fa-download"></i>
+            </div>
         <div id="presentation" class="container-fluid">
             <div id="presentation_card">
                 <h1 class="animated bounceInDown title_presentation">
@@ -62,31 +66,42 @@
                 </p>
             </div>
         </div>
-        <div class="container mt-3">
+        <div class="container mt-5" id="CV">
             <h2 class="section_title text-center"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">MON CV :</h2>
             <div class="row mt-3">
-                <div id="buttons_cv" class="col-3">
-                    <a href=""><input class="btn btn-primary" type="button" value="INFORMATIONS"></a>
-                    <a href=""><input class="btn btn-success" type="button" value="DIPLÔMES"></a>
-                    <a href=""><input class="btn btn-danger" type="button" value="COMPÉTENCES"></a>
-                    <a href=""><input class="btn btn-warning" type="button" value="EXPÉRIENCES"></a>
-                    <a href=""><input class="btn btn-info" type="button" value="SOFT SKILLS"></a>
+                <div id="buttons_cv" class="col-md-3 col-xs-12">
+                    <a class="col-xs-6" href="{{ path('cv_infos')}}"><input class="btn btn-primary" type="button" value="INFORMATIONS"></a>
+                    <a class="col-xs-6" href="{{ path('cv_diplomes')}}"><input class="btn btn-success" type="button" value="DIPLÔMES"></a>
+                    <a class="col-xs-6" href="{{ path('cv_experiences')}}"><input class="btn btn-warning" type="button" value="EXPÉRIENCES"></a>
+                    <a class="col-xs-6" href="{{ path('cv_soft_skills')}}"><input class="btn btn-info" type="button" value="SOFT SKILLS"></a>
+                </div>
+                <div class="col-9 m-auto">
+                    {% block cv %} {% endblock %}
                 </div>
             </div>
+        </div>
+        <div class="container mt-5" id="skills">
+            <h2 class="section_title text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">MES COMPÉTENCES :</h2>
+            <p class="text-center mb-3">(Cliquez ici)</p>
+            <div id="first_round_skills"></div>
+            <div class="line_skills"></div>
         </div>
         <div class="container">
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="{{ asset('/js/main.js') }}"></script>
         <script src="{{ asset('/js/Effects.js') }}"></script>
+        <script src="{{ asset('/js/CVFlo.js') }}"></script>
+
 
     </body>
 </html>
 
 <script>
+
 
 </script>

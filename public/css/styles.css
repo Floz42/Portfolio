@@ -26,12 +26,74 @@ body {
     font-family: "Poppins" !important;
     text-decoration: none;
     overflow-x: hidden;
-    font-size: 2vw;
+    font-size: 2em;
 }
 
 ul {
     list-style: none;
 }
+
+.blue_icon {
+    color: #5cadd3;
+}
+
+.section_title {
+    font-family: 'Poppins-Bold';
+    color: rgb(92, 173, 211);
+    font-size: 3vw;
+}
+
+.section_title_litle {
+    font-family: 'Poppins-Bold';
+    color: rgb(92, 173, 211);
+    font-size: 2vw;
+}
+
+#download_cv {
+    opacity: 0;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    top: 50%;
+    position: fixed;
+    padding: 1em;
+    border-radius: 25px 0 0 25px;
+    background-color: rgb(92, 173, 211);
+}
+
+#download_cv:hover {
+    color: white;
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes line_height {
+    from {
+        height: 0;
+    }
+    to {
+        height: 50px;
+    }
+}
+
+@keyframes line_width_horizontal {
+    from {
+        height: 0;
+    }
+    to {
+        height: 200px;
+    }
+}
+
 
 /************** NAVBAR **************/
 
@@ -179,16 +241,10 @@ ul {
 
 /************** INTRODUCE ME **************/
 
-#introduce_me {
+#introduce_me, #skills {
     background-color: rgb(192, 192, 192, 0.5);
     border-radius: 2vw;
     padding: 3vw;
-}
-
-.section_title {
-    font-family: 'Poppins-Bold';
-    color: rgb(92, 173, 211);
-    font-size: 3vw;
 }
 
 /************** CV **************/
@@ -198,7 +254,87 @@ ul {
     flex-direction: column;
 }
 
+@media all and (max-width: 767px) {
+    #buttons_cv {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #buttons_cv .btn {
+        width: 0;
+        margin: 0;
+    }
+}
+
 #buttons_cv .btn {
     width: 150px;
     margin: 1vw;
+}
+
+.cv_infos_picture {
+    width: 100;
+    height: auto;
+    border-radius: 50%;
+}
+
+.soft_skills {
+    font-size: 2vw !important;
+}
+
+/************** SKILLS **************/
+
+#skills {
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 300px;
+}
+
+.round_skills, #first_round_skills {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(92, 173, 211);
+}
+
+.line_skills {
+    background-color: rgb(192, 192, 192, 0.5); 
+    width: 5px; 
+    height: 0;
+}
+
+.horizontal_line_left {
+    transform: translateX(-115px) translateY(-15px);
+    background-color: silver !important;
+    width: 200px;
+    height : 1px;
+}
+
+.horizontal_line_right {
+    transform: translateX(115px) translateY(-15px);
+    background-color: silver;
+    width: 200px;
+    height : 1px;
+}
+
+.language_skills_left, .language_skills_right  {
+    width: 80px; 
+    height: 80px;
+    border-radius: 25%;
+    padding: 1vw;
+    animation: opacity 5s forwards;
+    border: 1px solid rgb(92, 173, 211);
+}
+
+.language_skills_right {
+    transform: translateX(200px) translateY(-40px);
+}
+
+.language_skills_left {
+    transform: translateX(-80px) translateY(-40px);
+} 
+
+.language_skills_left:hover, .language_skills_right:hover  {
+    background-color: rgb(92, 173, 211);
 }
