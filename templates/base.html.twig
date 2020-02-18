@@ -23,7 +23,7 @@
             <div id="navbar" class="container-fluid">
                 <img id="logo1" src="{{ asset('/images/logo.png') }}" class="img-fluid" alt="logo">
                 <div></div>
-                <ul class="row">
+                <ul class="row col-xs-12">
                     <a href=""><li>ACCUEIL</li></a>
                     <a href=""><li>MON CV</li></a>
                     <a href=""><li>MES COMPÉTENCES</li></a>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="container mt-3" id="introduce_me">
-            <div class="col-8 m-auto">
+            <div class="col-10 m-auto">
                 <h2 class="text-center section_title mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">PRÉSENTATION :</h2>
                 <p class="introduce_text">
                     Après un parcours atypique, une Licence STAPS, divers rôles dans l'événementiel et l'achat d'un fond de commerce, je décide à 31ans de revenir à mon premier amour qui est le développement via la formation "Développeur Web Junior" d'OpenClassrooms en octobre 2019.
@@ -79,11 +79,56 @@
                 </div>
             </div>
         </div>
-        <div class="container mt-5" id="skills">
+        <div class="container mt-5" id="skills_section">
             <h2 class="section_title text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">MES COMPÉTENCES :</h2>
             <p class="text-center mb-3">(Cliquez ici)</p>
             <div id="first_round_skills"></div>
             <div class="line_skills"></div>
+            <div id="skills"></div>
+        </div>
+        <div class="container mt-5 mb-3" id="projects">
+            <h2 class="section_title text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">MON PORTFOLIO :</h2>
+            <div class="col-md-10 col-xs-12 m-auto text-center">
+                <div class="project mb-5 col-12">
+                    <div class="col-2 chevron_left"><i id="chevron_left" class="fas fa-chevron-left"></i></div>
+                    <div class="col-8 image_project"></div>
+                    <div class="col-2 chevron_right"><i id="chevron_right" class="fas fa-chevron-right"></i></div>
+                </div>
+                <div class="thumbnails row m-auto col-md-10 col-xs-12">
+                    <div class="thumb thumbnail1_project col-3"></div>
+                    <div class="thumb thumbnail2_project col-3 ml-2 mr-2"></div>
+                    <div class="thumb thumbnail3_project col-3"></div>
+                </div>
+                <div class="informations_project mt-5">
+                    <table class="table table-striped m-auto text-center">
+                        <tbody>
+                            <tr>
+                                <td><h4>Titre : </h4></td>
+                                <td><h3 class="title_project"></h3></td>
+                            </tr>
+                            <tr>
+                                <td style="width:30%">Description : </td>
+                                <td><div class="description_project"></div></td>
+                            </tr>
+                            <tr>
+                                <td>Langages et frameworks : </td>
+                                <td><div class="languages_project"></div></td>
+                            </tr>
+                            <tr>
+                                <td>Lien : </td>
+                                <td><div class="link_project"></div></td>
+                            </tr><tr>
+                                <td>Lien Github :</td>
+                                <td><div class="github_link_project"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="large_image" class="col-12 mt-5 text-center">
+                    <div id="close_image">x</div>
+                    <div id="large_picture"></div>
+                </div>
+            </div>
         </div>
         <div class="container">
             {% block body %}{% endblock %}
@@ -94,8 +139,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="{{ asset('/js/main.js') }}"></script>
         <script src="{{ asset('/js/Effects.js') }}"></script>
-        <script src="{{ asset('/js/CVFlo.js') }}"></script>
+        <script src="{{ asset('/js/Skills.js') }}"></script>
         <script src="{{ asset('/js/Ajax.js') }}"></script>
+        <script src="{{ asset('/js/Slider.js') }}"></script>
+
 
 
 
@@ -103,6 +150,5 @@
 </html>
 
 <script>
-
 
 </script>

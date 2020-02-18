@@ -8,4 +8,13 @@
     #presentation {
         margin-top: 50px;
     }
+    .img_project {
+        margin-top: 2em;
+        width: 200px;
+        height: 150px;
+    }
+    #download_cv {
+        padding: 0.8em;
+        font-size: 0.8em;
+    }
 }

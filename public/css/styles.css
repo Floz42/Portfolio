@@ -241,7 +241,7 @@ ul {
 
 /************** INTRODUCE ME **************/
 
-#introduce_me, #skills {
+#introduce_me, #skills_section {
     background-color: rgb(192, 192, 192, 0.5);
     border-radius: 2vw;
     padding: 3vw;
@@ -284,11 +284,16 @@ ul {
 
 /************** SKILLS **************/
 
+#skills_section {
+    display: flex; 
+    align-items: center;
+    flex-direction: column;
+}
+
 #skills {
     display: flex; 
     align-items: center;
     flex-direction: column;
-    margin-bottom: 300px;
 }
 
 .round_skills, #first_round_skills {
@@ -328,9 +333,9 @@ ul {
 }
 
 .framework {
-    width: 70px !important;
-    height: 70px !important;
-    transform: translateY(-5px);
+    width: 60px !important;
+    height: 60px !important;
+    transform: translateY(-10px);
 }
 
 .language_skills_right {
@@ -347,4 +352,68 @@ ul {
 
 .ajax_cv_view {
     animation: opacity 2s forwards;
+}
+
+/************** PROJECTS **************/
+.project {
+    display: flex;
+    align-items: center;
+}
+
+.fa-chevron-left, .fa-chevron-right {
+    font-size: 2em;
+}
+
+.fa-chevron-left:hover, .fa-chevron-right:hover {
+    color: rgb(92, 173, 211);
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+}
+
+.thumbnail1_project, .thumbnail2_project, .thumbnail3_project {
+    border: 1px solid black; 
+    opacity: 0.5;
+    padding: 1em;
+}
+
+.thumbnail1_project:hover, .thumbnail2_project:hover, .thumbnail3_project:hover {
+    opacity: 1;
+    cursor: zoom-in;
+}
+
+.img_project {
+    margin-top: 2em;
+    width: 500px;
+    height: 250px;
+}
+
+.image_largest {
+    width: 100%; 
+    height: auto;
+    padding: 1em; 
+    background: silver;
+}
+
+#large_image {
+    display: none;
+    padding: 0.5em;
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+    border: 2px solid rgb(92, 173, 211);
+    background-color: rgb(192, 192, 192, 0.2);
+}
+#close_image {
+    position: absolute; 
+    top: 0; 
+    right: 0;
+    cursor: pointer; 
+    margin-right: 1em;
+    font-family: "Poppins-Bold";
+}
+#projects {
+    margin-bottom: 1000px !important;
 }
