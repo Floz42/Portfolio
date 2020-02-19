@@ -241,7 +241,7 @@ ul {
 
 /************** INTRODUCE ME **************/
 
-#introduce_me, #skills_section {
+#introduce_me, #skills_section, #contact {
     background-color: rgb(192, 192, 192, 0.5);
     border-radius: 2vw;
     padding: 3vw;
@@ -414,6 +414,14 @@ ul {
     margin-right: 1em;
     font-family: "Poppins-Bold";
 }
-#projects {
-    margin-bottom: 1000px !important;
+
+/************** CONTACT **************/
+
+form label {
+    margin: 0 !important;
 }
+
+.icon_contact {
+    color: rgb(92, 173, 211);
+}
+

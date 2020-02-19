@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Entity\CVInfos;
 use App\Entity\CVSoftSkills;
 use App\Repository\CVDiplomesRepository;
@@ -11,14 +13,43 @@ use App\Repository\CVSoftSkillsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 class MainController extends AbstractController
 {
     /**
      * @Route("/", name="accueil")
      */
-    public function index()
+    public function index(Request $request, \Swift_Mailer $mailer)
     {
-        return $this->render('main/cv/accueil.html.twig');
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $message = (new \Swift_Message())
+                ->setSubject('Nouveau message de ton Portfolio !!')
+                ->setFrom($data->getEmail())
+                ->setTo('flo.carreclub@gmail.com')
+                ->setContentType("text/html")
+                ->setBody(
+                    '<html>' . 
+                        '<body>' . 
+                            'Nouveau message de : '. $data->getFirstname() . ' ' . $data->getLastname() . '<br>' .
+                            'Son e-mail : '. $data->getEmail() . '<br>' .
+                            'Titre du message : ' . $data->getTitle() . '<br>' .
+                            'Contenu du message : ' . $data->getContent() . '<br>' .
+                        '</body>' . 
+                    '</html>' .
+                    'text/html'
+                );
+            $mailer->send($message);
+            $this->addFlash('success', 'Votre message a bien été envoyé.');
+            return $this->redirect($request->getUri());
+        }
+        return $this->render('main/cv/accueil.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -69,6 +100,5 @@ class MainController extends AbstractController
             'infos' => $infos
         ]);
      }
-
 
 }

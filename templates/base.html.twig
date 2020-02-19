@@ -56,6 +56,9 @@
                 <input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-12">
             </div>
         </div>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
         <div class="container mt-3" id="introduce_me">
             <div class="col-10 m-auto">
                 <h2 class="text-center section_title mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">PRÉSENTATION :</h2>
@@ -129,6 +132,22 @@
                     <div id="large_picture"></div>
                 </div>
             </div>
+        </div>
+        <div class="container mt-5 col-6 col-xs-12" id="contact">
+            <h2 class="section_title text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">ME CONTACTER :</h2>
+                {{ form_start(form) }}
+                <div class="">
+                        <div class="col-6 m-auto"><i class="icon_contact fas fa-user"></i> Nom :{{ form_row(form.firstname, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                        <div class="col-6 m-auto"><i class="icon_contact fas fa-user"></i> Prénom :{{ form_row(form.lastname, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                        <div class="col-6 m-auto"><i class="icon_contact fas fa-envelope"></i> E-mail :{{ form_row(form.email, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                        <div class="col-6 m-auto"><i class="icon_contact fas fa-heading"></i> Titre :{{ form_row(form.title, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                        <div class="col-8 m-auto"><i class="icon_contact fas fa-comment-dots"></i> Message :{{ form_row(form.content, {'attr':{'class':'contact_flo mb-2 form-control', 'rows' : '6'}}) }}</div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Envoyer" class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
         </div>
         <div class="container">
             {% block body %}{% endblock %}
