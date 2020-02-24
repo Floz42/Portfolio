@@ -303,6 +303,17 @@ ul {
     background-color: rgb(92, 173, 211);
 }
 
+#first_round_skills {
+    cursor: pointer;
+    animation: round_effect 2s ease infinite;
+}
+
+@keyframes round_effect {
+    to {
+        box-shadow: 0px 0px 50px black; 
+    }
+}
+
 .line_skills {
     background-color: rgb(192, 192, 192, 0.5); 
     width: 5px; 
@@ -425,3 +436,29 @@ form label {
     color: rgb(92, 173, 211);
 }
 
+/************** COMMENTS **************/
+
+#contact_comments {
+    margin-top: 6vw !important;
+}
+
+#comments {
+    border: 2px solid rgb(92, 173, 211);
+    border-radius: 2vw;
+    padding: 2vw;
+}
+
+.section_comments {
+    font-family: 'Poppins-Bold';
+    color: rgb(92, 173, 211);
+    font-size: 2.5vw;
+}
+
+#comments_links p a {
+    text-decoration: none;
+    color: black; 
+}
+
+#comments_links p a:hover {
+    color: rgb(92, 173, 211);
+}
