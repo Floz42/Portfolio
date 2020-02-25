@@ -5,11 +5,9 @@ class Ajax {
         this.subscribe_ajax();
         this.submit_ajax();
         this.ajax_post_contact();
-        this.ajax_post_subscribe();
-     }
+    }
 
      ajax_post_subscribe() {
-        $('#subscribe_button').on('submit', (e) => {
             alert('yeahhh');
             e.preventDefault();
             let form = $('#subscribe form').get(0);
@@ -26,7 +24,6 @@ class Ajax {
                     $('#subscribe').html('<div class="alert alert-success text-center"> Votre inscription a bien été prise en compte.</div>');
                 },
             });
-        })
     }
 
     buttons_cv_click() {
@@ -67,7 +64,7 @@ class Ajax {
     }
 
     subscribe_ajax() {
-        $('#register').on('click', function() {
+        $('#register').on('click', function(e) {
             $.ajax({
                 url : 'subscribe_ajax',
                 type : 'GET',
@@ -101,8 +98,6 @@ class Ajax {
             });
         })
     }
-
-
 }
 
 const ajax = new Ajax();
