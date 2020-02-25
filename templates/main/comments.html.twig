@@ -18,6 +18,10 @@
         {% for message in app.flashes('subscribe_success') %}
             <div class="alert alert-success text-center">{{ message }}</div>
         {% endfor %}
+        {% if error %}
+        <div class="alert alert-danger text-center">{{ error.messageKey| trans(error.messagedata, 'security') }}</div>
+    {% endif %}
+
     {% else %}
         <div id="deconnexion">
             <p>Vous êtes connecté en tant que {{ app.user.username }} <a href="{{ path('logout') }}">(Se déconnecter)</a></p>

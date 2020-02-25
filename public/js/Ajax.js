@@ -9,7 +9,7 @@ class Ajax {
     }
 
      ajax_post_subscribe() {
-            alert('yeahhh');
+        /*     alert('yeahhh');
             e.preventDefault();
             let form = $('#subscribe form').get(0);
             console.log(form);
@@ -27,7 +27,7 @@ class Ajax {
                 error : function() {
                     alert('erreur');
                 }
-            });
+            }); */
     }
 
     buttons_cv_click() {

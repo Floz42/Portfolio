@@ -67,42 +67,13 @@ class MainController extends AbstractController
         return $this->render('main/cv/accueil.html.twig', [
             'form_contact' => $form_contact->createView(),
             'comments' => $comments,
-            'form_subscribe' => $form_subscribe->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/subscribe_ajax", name="subscribe_ajax")
-     */
-    public function show_subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
-    {
-        $subscribe = new Users();
-        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
-        $form_subscribe->handleRequest($request); 
-        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
-            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
-            $subscribe->setPassword($passwordCrypt);
-            $subscribe->setRoles('ROLE_USER');
-            $manager->persist($subscribe);
-            $manager->flush();
-            $this->addFlash('success', 'Votre inscription est bien prise en compte.');
-            return $this->redirectToRoute('accueil');
-        }
-        return $this->render('main/subscribe.html.twig', [
-            'form_subscribe' => $form_subscribe->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/submit_ajax", name="submit_ajax")
-     */
-    public function submit_ajax(AuthenticationUtils $util) 
-    {
-        return $this->render('main/submit.html.twig', [
+            'form_subscribe' => $form_subscribe->createView(),
             "lastUsername" => $util->getLastUsername(),
             "error" => $util->getLastAuthenticationError()
         ]);
     }
+
+
 
     /**
      * @Route("/diplomes_ajax", name="diplomes_ajax")
@@ -158,6 +129,39 @@ class MainController extends AbstractController
     public function login(AuthenticationUtils $util) 
     {
         return $this->render('main/cv/accueil.html.twig', [
+            "lastUsername" => $util->getLastUsername(),
+            "error" => $util->getLastAuthenticationError()
+        ]);
+    }
+
+        /**
+     * @Route("/subscribe_ajax", name="subscribe_ajax")
+     */
+    public function show_subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
+    {
+        $subscribe = new Users();
+        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
+        $form_subscribe->handleRequest($request); 
+        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
+            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
+            $subscribe->setPassword($passwordCrypt);
+            $subscribe->setRoles('ROLE_USER');
+            $manager->persist($subscribe);
+            $manager->flush();
+            $this->addFlash('success', 'Votre inscription est bien prise en compte.');
+            return $this->redirectToRoute('accueil');
+        }
+        return $this->render('main/subscribe.html.twig', [
+            'form_subscribe' => $form_subscribe->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/submit_ajax", name="submit_ajax")
+     */
+    public function submit_ajax(AuthenticationUtils $util) 
+    {
+        return $this->render('main/submit.html.twig', [
             "lastUsername" => $util->getLastUsername(),
             "error" => $util->getLastAuthenticationError()
         ]);
