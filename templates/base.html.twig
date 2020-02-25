@@ -56,9 +56,6 @@
                 <input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-12">
             </div>
         </div>
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
-        {% endfor %}
         {% include 'main/introduce_me.html.twig' %}
         {% include 'main/cv.html.twig' %}
         {% include 'main/skills.html.twig' %}

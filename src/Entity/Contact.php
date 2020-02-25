@@ -9,13 +9,11 @@ class Contact {
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Length(min=2, minMessage="Votre nom doit comporter au minimum deux caractères.")
      */
     private $firstname;
 
     /**
      * @var string
-     * @Assert\Length(min=2, minMessage="Votre prénom doit comporter au minimum deux caractères.")
      */
     private $lastname;
 
@@ -29,14 +27,12 @@ class Contact {
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Length(min=5, minMessage="Votre titre doit comporter au minimum cinq caractères.")
      */
     private $title;
     
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Length(min=15, minMessage="Votre contenu doit comporter au minimum quinze caractères.")
      */
     private $content;
 

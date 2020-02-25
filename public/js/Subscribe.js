@@ -31,3 +31,4 @@ class Subscribe {
     }
 }
 
+const subscribe = new Subscribe();

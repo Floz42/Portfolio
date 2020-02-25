@@ -46,12 +46,9 @@ class MainController extends AbstractController
                             'Titre du message : ' . $data->getTitle() . '<br>' .
                             'Contenu du message : ' . $data->getContent() . '<br>' .
                         '</body>' . 
-                    '</html>' .
-                    'text/html'
+                    '</html>' 
                 );
             $mailer->send($message);
-            $this->addFlash('success', 'Votre message a bien été envoyé.');
-            return $this->redirect($request->getUri());
         }
 
         return $this->render('main/cv/accueil.html.twig', [
@@ -63,7 +60,7 @@ class MainController extends AbstractController
     /**
      * @Route("/subscribe_ajax", name="subscribe_ajax")
      */
-    public function subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
+    public function show_subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
     {
         $subscribe = new Users();
         $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
@@ -74,8 +71,6 @@ class MainController extends AbstractController
             $subscribe->setRoles('ROLE_USER');
             $manager->persist($subscribe);
             $manager->flush();
-            $this->addFlash('success', 'Votre inscription est bien prise en compte.');
-            return $this->redirect($request->getUri());
         }
         return $this->render('main/subscribe.html.twig', [
             'form_subscribe' => $form_subscribe->createView()
