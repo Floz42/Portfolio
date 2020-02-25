@@ -1,16 +1,16 @@
     <div class="col-md-5 col-md-5 col-xs-12 m-auto" id="contact">
         <h2 class="section_title text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">ME CONTACTER :</h2>
-            {{ form_start(form) }}
+            {{ form_start(form_contact) }}
             <div class="">
-                <div class="col-10 m-auto"><i class="icon_contact fas fa-user"></i> Nom :{{ form_row(form.firstname, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
-                <div class="col-10 m-auto"><i class="icon_contact fas fa-user"></i> Prénom :{{ form_row(form.lastname, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
-                <div class="col-10 m-auto"><i class="icon_contact fas fa-envelope"></i> E-mail :{{ form_row(form.email, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
-                <div class="col-10 m-auto"><i class="icon_contact fas fa-heading"></i> Titre :{{ form_row(form.title, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
-                <div class="col-10 m-auto"><i class="icon_contact fas fa-comment-dots"></i> Message :{{ form_row(form.content, {'attr':{'class':'contact_flo mb-2 form-control', 'rows' : '6'}}) }}</div>
+                <div class="col-10 m-auto"><i class="icon_contact fas fa-user"></i> Nom :{{ form_row(form_contact.firstname, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                <div class="col-10 m-auto"><i class="icon_contact fas fa-user"></i> Prénom :{{ form_row(form_contact.lastname, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                <div class="col-10 m-auto"><i class="icon_contact fas fa-envelope"></i> E-mail :{{ form_row(form_contact.email, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                <div class="col-10 m-auto"><i class="icon_contact fas fa-heading"></i> Titre :{{ form_row(form_contact.title, {'attr':{'class':'contact_flo mb-2 form-control'}}) }}</div>
+                <div class="col-10 m-auto"><i class="icon_contact fas fa-comment-dots"></i> Message :{{ form_row(form_contact.content, {'attr':{'class':'contact_flo mb-2 form-control', 'rows' : '6'}}) }}</div>
                 <div class="form-group text-center">
                     <input type="submit" value="Envoyer" class="mt-2 btn btn-primary">
                 </div>
             </div>
-        {{ form_end(form) }}
+        {{ form_end(form_contact) }}
     </div>
     

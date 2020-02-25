@@ -1,0 +1,16 @@
+<div id="submit" class="m-auto col-8">
+    {% if error %}
+        <div class="alert alert-danger">Le pseudo et/ou le mot de passe ne sont pas bons.</div>
+    {% endif %}
+    <form method="post">
+        <div class="form-group">
+            <label for="username" class="required">Pseudo :</label>
+            <input type="text" id="submit_usename" name="_username" required="required" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="username" class="required">Mot de passe :</label>
+            <input type="password" id="submit_password" name="_password" required="required" class="form-control">
+        </div>
+        <a href="{{ path('subscribe_ajax') }}"><input type="button" id="submit_button" value="Se connecter" class="btn btn-info"></a>
+    </form>
+</div>

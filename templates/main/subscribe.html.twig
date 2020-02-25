@@ -1,0 +1,13 @@
+<div id="subscribe" class="m-auto col-8">
+    {{ form_start(form_subscribe) }}        
+        {{ form_row(form_subscribe.username) }}
+        <div class="alert alert-danger" id="error_pseudo">Votre pseudo doit comporter au moins 5 caracères.</div>
+        {{ form_row(form_subscribe.password) }}
+        <div class="alert alert-danger" id="error_password">Votre mot de passe doit comporter au moins 6 caracères.</div>
+        {{ form_row(form_subscribe.verifPassword) }}
+        <div class="alert alert-danger" id="error_password_verify">Vos mots de passe doivent être identiques.</div>
+        {{ form_row(form_subscribe.email) }}
+        <input type="submit" id="subscribe_button" value="S'inscrire" class="btn btn-info">
+    {{ form_end(form_subscribe) }}
+    <div class="" id="confirm_subscribe"></div>
+</div>

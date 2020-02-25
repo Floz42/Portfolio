@@ -454,11 +454,23 @@ form label {
     font-size: 2.5vw;
 }
 
-#comments_links p a {
-    text-decoration: none;
-    color: black; 
+#comments_links {
+    display: flex;
+    justify-content: center;
 }
 
-#comments_links p a:hover {
+#comments_links div  {
+    color: black; 
+    cursor: pointer;
+    margin: auto;
+}
+
+#comments_links div:hover {
     color: rgb(92, 173, 211);
+}
+
+/************** SUBSCRIBE - SUBMIT **************/
+
+#subscribe, #submit {
+    animation: opacity 2s forwards;
 }

@@ -2,6 +2,9 @@ class Ajax {
     constructor() {
         this.buttons_cv_click();
         this.ajax_cv('infos_ajax');
+        this.subscribe_ajax();
+        this.submit_ajax();
+        this.subscribe_post();
      }
 
 
@@ -17,13 +20,62 @@ class Ajax {
             url : url,
             type : 'GET',
             dataType : 'html',
-            success : function(code_html, statut){ 
-                $('#cv_ajax').html(code_html);
+            success : function(html, statut){ 
+                $('#cv_ajax').html(html);
             },
             error : function(resultat, statut, erreur){
-                alert("Une erreur sest produite lors de la requête: " + url);
+                alert("Une erreur s'est produite lors de la requête: " + url);
             }
          });
+    }
+
+    subscribe_ajax() {
+        $('#register').on('click', function() {
+            $.ajax({
+                url : 'subscribe_ajax',
+                type : 'GET',
+                dataType : 'html',
+                success : function(html, status){
+                    $('#form_subscribe_submit').html(html);
+                    const subscribe = new Subscribe();
+                },
+                error : function(resultat, statut,errur) {
+                    alert("Une erreur s'est produite lors du chargement du formulaire d'inscription.");
+                }
+            })
+        });
+    }
+
+/*     subscribe_post() {
+        $('#subscribe_button').on('click', function() {
+            $.ajax({
+                url : 'subscribe_ajax',
+                type : 'POST',
+                dataType : 'html',
+                success : function(html, status){
+                    alert('Tout s\'est bien passé.');
+                },
+                error : function(resultat, statut,errur) {
+                    alert("Une erreur s'est produite lors du chargement du formulaire d'inscription.");
+                }
+            })
+        });
+    } */
+
+    submit_ajax() {
+        $('#connexion').on('click', function() {
+            $.ajax({
+                url : 'submit_ajax',
+                type : 'GET',
+                dataType : 'html',
+                success : function(html, status){
+                    $('#form_subscribe_submit').html(html);
+                },
+                error : function(resultat, statut,errur) {
+                    alert("Une erreur s'est produite lors du chargement du formulaire de connexion.");
+                }
+            })
+        });
     }
 }
 

@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Users;
 use App\Form\ContactType;
-use App\Entity\CVInfos;
-use App\Entity\CVSoftSkills;
+use App\Form\InscriptionType;
+use App\Repository\CommentsRepository;
 use App\Repository\CVDiplomesRepository;
 use App\Repository\CVExperiencesRepository;
 use App\Repository\CVInfosRepository;
@@ -13,20 +14,25 @@ use App\Repository\CVSoftSkillsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface as ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class MainController extends AbstractController
 {
     /**
      * @Route("/", name="accueil")
      */
-    public function index(Request $request, \Swift_Mailer $mailer)
+    public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, AuthenticationUtils $util)
     {
         $contact = new Contact();
-        $form = $this->createForm(ContactType::class, $contact);
+        $form_contact = $this->createForm(ContactType::class, $contact);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+        $comments = $repository->findAllInverse();
+        
+        $form_contact->handleRequest($request);
+        if ($form_contact->isSubmitted() && $form_contact->isValid()) {
+            $data = $form_contact->getData();
             $message = (new \Swift_Message())
                 ->setSubject('Nouveau message de ton Portfolio !!')
                 ->setFrom($data->getEmail())
@@ -47,8 +53,65 @@ class MainController extends AbstractController
             $this->addFlash('success', 'Votre message a bien été envoyé.');
             return $this->redirect($request->getUri());
         }
+
         return $this->render('main/cv/accueil.html.twig', [
-            'form' => $form->createView()
+            'form_contact' => $form_contact->createView(),
+            'comments' => $comments
+        ]);
+    }
+
+    /**
+     * @Route("/subscribe_ajax", name="subscribe_ajax")
+     */
+    public function subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
+    {
+        $subscribe = new Users();
+        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
+        $form_subscribe->handleRequest($request); 
+        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
+            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
+            $subscribe->setPassword($passwordCrypt);
+            $subscribe->setRoles('ROLE_USER');
+            $manager->persist($subscribe);
+            $manager->flush();
+            $this->addFlash('success', 'Votre inscription est bien prise en compte.');
+            return $this->redirect($request->getUri());
+        }
+        return $this->render('main/subscribe.html.twig', [
+            'form_subscribe' => $form_subscribe->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/confirm_subscribe", name="confirm_subscribe")
+     */
+    public function confirm_subscribe(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
+    {
+        $subscribe = new Users();
+        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
+        $form_subscribe->handleRequest($request); 
+        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
+            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
+            $subscribe->setPassword($passwordCrypt);
+            $subscribe->setRoles('ROLE_USER');
+            $manager->persist($subscribe);
+            $manager->flush();
+            $this->addFlash('success', 'Votre inscription est bien prise en compte.');
+            return $this->redirect($request->getUri());
+        }
+        return $this->render('main/subscribe.html.twig', [
+            'form_subscribe' => $form_subscribe->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/submit_ajax", name="submit_ajax")
+     */
+    public function submit_ajax(AuthenticationUtils $util) 
+    {
+        return $this->render('main/submit.html.twig', [
+            "lastUsername" => $util->getLastUsername(),
+            "error" => $util->getLastAuthenticationError()
         ]);
     }
 
@@ -100,5 +163,25 @@ class MainController extends AbstractController
             'infos' => $infos
         ]);
      }
+
+    /**
+    * @Route("/login", name="login")
+    */
+    public function login(AuthenticationUtils $util) 
+    {
+        return $this->render('main/cv/accueil.html.twig', [
+            "lastUsername" => $util->getLastUsername(),
+            "error" => $util->getLastAuthenticationError()
+        ]);
+    }
+    /**
+    * @Route("/logout", name="logout")
+    */
+    public function logout() 
+    {
+        $this->addFlash('success', 'Vous êtes bien déconnecté.');
+        return $this->redirectToRoute('accueil');
+    }
+
 
 }

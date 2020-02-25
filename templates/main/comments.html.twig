@@ -1,12 +1,34 @@
 <div class="col-md-6 col-lg-6 col-xs-12 m-auto" id="comments">
     <h2 class="section_comments text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">LAISSER UN COMMENTAIRE :</h2>
-    <div id="comments_links" class="text-center m-auto">
-        <p>
-            <a href="">( Se connecter </a>
-            -
-            <a href=""> S'inscrire )</a>
-        </p>
-    </div>
-    <p>Liste des commentaires : </p>
+    {% if not app.user %}
+        <div id="comments_links" class="text-center m-auto">
+            <p>
+                <div id="connexion">( Se connecter </div>
+                -
+                <div id="register"> S'inscrire )</div>
+            </p>
+        </div>
+    {% else %}
+        <div id="deconnexion">
+            <p>Vous êtes connecté en tant que {{ app.user.username }} <a href="{{ path('logout') }}">(Se déconnecter)</a></p>
+        </div>
+    {% endif %}
     <hr>
+    <div id="form_subscribe_submit"></div>
+    
+    <p class="mt-5">Liste des commentaires : </p>
+    <hr>
+    <div class="container">
+        {% for comment in comments %}
+        <div class="row">
+            <div class="row col-12">
+                 Posté le {{ comment.date_comment|date('d/m/Y') }} par : {{ comment.users.username }}
+            </div>
+            <div class="row col-12">
+                {{ comment.comment }}
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
 </div>
