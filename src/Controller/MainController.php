@@ -71,26 +71,6 @@ class MainController extends AbstractController
             $subscribe->setRoles('ROLE_USER');
             $manager->persist($subscribe);
             $manager->flush();
-        }
-        return $this->render('main/subscribe.html.twig', [
-            'form_subscribe' => $form_subscribe->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/confirm_subscribe", name="confirm_subscribe")
-     */
-    public function confirm_subscribe(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
-    {
-        $subscribe = new Users();
-        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
-        $form_subscribe->handleRequest($request); 
-        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
-            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
-            $subscribe->setPassword($passwordCrypt);
-            $subscribe->setRoles('ROLE_USER');
-            $manager->persist($subscribe);
-            $manager->flush();
             $this->addFlash('success', 'Votre inscription est bien prise en compte.');
             return $this->redirect($request->getUri());
         }
@@ -139,7 +119,6 @@ class MainController extends AbstractController
      */
     public function softskills_ajax(CVSoftSkillsRepository $repository)
     {
-
         $softskills = $repository->findAll();
 
         return $this->render('main/cv/softskills_ajax.html.twig', [
@@ -169,6 +148,7 @@ class MainController extends AbstractController
             "error" => $util->getLastAuthenticationError()
         ]);
     }
+
     /**
     * @Route("/logout", name="logout")
     */

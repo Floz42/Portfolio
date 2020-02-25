@@ -3,21 +3,22 @@ class Ajax {
         this.buttons_cv_click();
         this.ajax_cv('infos_ajax');
         this.subscribe_ajax();
-        //this.submit_ajax();
+        this.submit_ajax();
         this.ajax_post_contact();
-        //this.ajax_post_subscribe();
+        this.ajax_post_subscribe();
      }
 
      ajax_post_subscribe() {
-        $('#subscribe_button').on('submit', function(e) {
-            e.preventDefault();
+        $('#subscribe_button').on('submit', (e) => {
             alert('yeahhh');
+            e.preventDefault();
             let form = $('#subscribe form').get(0);
             console.log(form);
             let url = $(this).attr("action");
             let formData = new FormData(form);
             $.ajax({
                 type : 'POST',
+                url : '/subscribe_ajax',
                 data : formData,
                 processData: false,
                 contentType: false, 
@@ -56,7 +57,7 @@ class Ajax {
                 type : 'GET',
                 dataType : 'html',
                 success : function(html, status){
-                    $('#form_subscribe_submit').html(html);
+                    $('#form_submit').html(html);
                 },
                 error : function(resultat, statut,errur) {
                     alert("Une erreur s'est produite lors du chargement du formulaire de connexion.");
@@ -72,7 +73,8 @@ class Ajax {
                 type : 'GET',
                 dataType : 'html',
                 success : function(html, status){
-                    $('#form_subscribe_submit').html(html);
+                    $('#form_subscribe').html(html);
+                    const subscribe = new Subscribe();
                 },
                 error : function(resultat, statut,errur) {
                     alert("Une erreur s'est produite lors du chargement du formulaire d'inscription.");
