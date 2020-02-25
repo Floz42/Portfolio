@@ -8,6 +8,16 @@
                 <div id="register"> S'inscrire )</div>
             </p>
         </div>
+        {% if not form_subscribe.vars.valid %}
+        {% for child in form_subscribe.children %}
+            {%for error in child.vars.errors%}
+                <div class="alert alert-danger text-center">{{ error.message }}</div>
+            {%endfor%}
+        {%endfor%}
+        {%endif%}
+        {% for message in app.flashes('subscribe_success') %}
+            <div class="alert alert-success text-center">{{ message }}</div>
+        {% endfor %}
     {% else %}
         <div id="deconnexion">
             <p>Vous êtes connecté en tant que {{ app.user.username }} <a href="{{ path('logout') }}">(Se déconnecter)</a></p>

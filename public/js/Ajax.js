@@ -5,6 +5,7 @@ class Ajax {
         this.subscribe_ajax();
         this.submit_ajax();
         this.ajax_post_contact();
+        $('#subscribe form').on('submit', () => this.ajax_post_subscribe());
     }
 
      ajax_post_subscribe() {
@@ -23,6 +24,9 @@ class Ajax {
                 success : function(data) {
                     $('#subscribe').html('<div class="alert alert-success text-center"> Votre inscription a bien été prise en compte.</div>');
                 },
+                error : function() {
+                    alert('erreur');
+                }
             });
     }
 

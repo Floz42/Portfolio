@@ -29,6 +29,19 @@ class MainController extends AbstractController
         $form_contact = $this->createForm(ContactType::class, $contact);
 
         $comments = $repository->findAllInverse();
+
+        $subscribe = new Users();
+        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
+        $form_subscribe->handleRequest($request); 
+        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
+            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
+            $subscribe->setPassword($passwordCrypt);
+            $subscribe->setRoles('ROLE_USER');
+            $manager->persist($subscribe);
+            $manager->flush();
+            $this->addFlash('subscribe_success', 'Votre inscription est bien prise en compte.');
+            return $this->redirectToRoute('accueil');
+        }
         
         $form_contact->handleRequest($request);
         if ($form_contact->isSubmitted() && $form_contact->isValid()) {
@@ -53,7 +66,8 @@ class MainController extends AbstractController
 
         return $this->render('main/cv/accueil.html.twig', [
             'form_contact' => $form_contact->createView(),
-            'comments' => $comments
+            'comments' => $comments,
+            'form_subscribe' => $form_subscribe->createView()
         ]);
     }
 
@@ -72,7 +86,7 @@ class MainController extends AbstractController
             $manager->persist($subscribe);
             $manager->flush();
             $this->addFlash('success', 'Votre inscription est bien prise en compte.');
-            return $this->redirect($request->getUri());
+            return $this->redirectToRoute('accueil');
         }
         return $this->render('main/subscribe.html.twig', [
             'form_subscribe' => $form_subscribe->createView()
