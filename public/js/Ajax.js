@@ -6,7 +6,6 @@ class Ajax {
         this.submit_ajax();
         this.ajax_post_contact();
         this.navigation_ajax();
-        this.ajax_post_submit();
     }
     
     ajax_post_contact() {
@@ -29,26 +28,6 @@ class Ajax {
                 }
             });
         })
-    }
-     ajax_post_submit() {
-         $('#submit').click((e) => {
-             e.preventDefault();
-             $.post(
-                 'login',
-                 {
-                     username: $('#submit_username').val(),
-                     password: $('#submit_password').val()
-                 }, 
-                 function(data) {
-                     if(data == 'Success') {
-                         alert('Vous êtes bien connecté');
-                     } else {
-                         alert('Erreur d\'authentification)');
-                     }
-                 },
-                 'text'
-             );
-         });
     }
 
     buttons_cv_click() {
