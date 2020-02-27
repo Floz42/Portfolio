@@ -21,18 +21,23 @@
         {% if error %}
         <div class="alert alert-danger text-center">{{ error.messageKey| trans(error.messagedata, 'security') }}</div>
     {% endif %}
-
     {% else %}
         <div id="deconnexion">
             <p>Vous êtes connecté en tant que {{ app.user.username }} <a href="{{ path('logout') }}">(Se déconnecter)</a></p>
         </div>
+        <form class="mt-3" action="{{ path('post_comment') }}"method="post"> 
+            <div class="form-group">
+              <label for="put_message">Votre commentaire :</label>
+              <textarea class="form-control" name="comment" id="put_message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+          </form>
     {% endif %}
-    <hr>
     <div id="form_subscribe"></div>
     <div id="form_submit"></div>
     <p class="mt-5">Liste des commentaires : </p>
     <hr>
-    <div class="container">
+    <div class="container" id="container_comments">
         {% for comment in comments %}
         <div class="row">
             <div class="row col-12">
@@ -44,5 +49,8 @@
         </div>
         <hr>
         {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(comments) }}
+        </div>
     </div>
 </div>

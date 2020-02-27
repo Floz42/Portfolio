@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\Comments;
 use App\Entity\Users;
 use App\Form\ContactType;
 use App\Form\InscriptionType;
@@ -15,20 +16,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class MainController extends AbstractController
 {
+
     /**
      * @Route("/", name="accueil")
      */
-    public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, AuthenticationUtils $util)
+    public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, AuthenticationUtils $util, PaginatorInterface $paginator)
     {
-        $contact = new Contact();
-        $form_contact = $this->createForm(ContactType::class, $contact);
 
-        $comments = $repository->findAllInverse();
+        $comments = $paginator->paginate(
+            $repository->paginationComments(),
+            $request->query->getInt('page', 1),
+            5
+        );
 
         $subscribe = new Users();
         $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
@@ -43,6 +48,9 @@ class MainController extends AbstractController
             return $this->redirectToRoute('accueil');
         }
         
+        $contact = new Contact();
+        $form_contact = $this->createForm(ContactType::class, $contact);
+
         $form_contact->handleRequest($request);
         if ($form_contact->isSubmitted() && $form_contact->isValid()) {
             $data = $form_contact->getData();
@@ -74,6 +82,23 @@ class MainController extends AbstractController
     }
 
 
+    /**
+     * @Route("/post_comment", name="post_comment")
+     */
+    public function post_comment(ObjectManager $manager)
+    {
+        $user = $this->getUser();
+        $comment = new Comments();
+        if (!empty($_POST['comment'])) {
+            $comment->setComment($_POST['comment']);
+            $comment->setDate_comment(new \DateTime());
+            $comment->setUsers($user);
+            $manager->persist($comment);
+            $manager->flush();
+            $this->addFlash('success', 'Votre message a bien été posté.');
+            return $this->redirectToRoute('accueil');
+        }
+    }
 
     /**
      * @Route("/diplomes_ajax", name="diplomes_ajax")

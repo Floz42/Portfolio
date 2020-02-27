@@ -33,7 +33,7 @@ ul {
     list-style: none;
 }
 
-.blue_icon {
+.blue_icon, .color_blue {
     color: #5cadd3;
 }
 
@@ -473,4 +473,29 @@ form label {
 
 #subscribe, #submit {
     animation: opacity 2s forwards;
+}
+
+.navigation nav ul {
+    display: flex; 
+    justify-content: center;
+}
+
+/************** ADMIN ACCUEIL **************/
+
+#admin_accueil {
+    padding: 2vw;
+    border: 2px solid rgb(92, 173, 211);
+    border-radius: 2vw;
+}
+
+#admin_message_logout {
+    display: flex; 
+    justify-content: center;
+    margin-top: 3vw;
+    text-decoration: none;
+}
+
+#admin_message_logout div:hover {
+    color: black;
+    font-size: 1.4vw;
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Comments;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Comments|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,12 @@ class CommentsRepository extends ServiceEntityRepository
         parent::__construct($registry, Comments::class);
     }
 
+    public function paginationComments(): Query
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.id', 'DESC')
+            ->getQuery();   
+    }
     // /**
     //  * @return Comments[] Returns an array of Comments objects
     //  */

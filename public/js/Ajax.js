@@ -5,6 +5,7 @@ class Ajax {
         this.subscribe_ajax();
         this.submit_ajax();
         this.ajax_post_contact();
+        this.navigation_ajax();
         $('#subscribe form').on('submit', () => this.ajax_post_subscribe());
     }
 
@@ -49,6 +50,24 @@ class Ajax {
                 alert("Une erreur s'est produite lors de la requête: " + url);
             }
          });
+    }
+
+    navigation_ajax() {
+        $('.page-link').on('click', function(e) {
+            let url = (window.location.origin + $(this).attr("href")); 
+            console.log(url);
+            e.preventDefault();
+            $.ajax({
+                url : url,
+                type : 'GET',
+                success:function(){ 
+                    window.location.href = url;
+                },
+                error : function(resultat, statut,errur) {
+                    alert("Une erreur s'est produite lors du chargement du formulaire de connexion.");
+                } 
+            });
+        })
     }
 
     submit_ajax() {
@@ -102,6 +121,7 @@ class Ajax {
             });
         })
     }
+
 }
 
 const ajax = new Ajax();
