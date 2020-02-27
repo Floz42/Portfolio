@@ -22,17 +22,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class MainController extends AbstractController
 {
-    /**
-     * @Route("/contact", name="contact", methods="GET|POST")
-     */
-    public function contact(Request $request, \Swift_Mailer $mailer) 
-    {
-        $test = $request->get('contact[firstname]');
-
-        return $this->render('main/cv/test.html.twig', [
-            'test' => $test
-        ]);
-    }
 
     /**
      * @Route("/", name="accueil")
@@ -79,7 +68,7 @@ class MainController extends AbstractController
             $subscribe->setRoles('ROLE_USER');
             $manager->persist($subscribe);
             $manager->flush();
-            return $this->redirectToRoute('accueil');
+            return $this->redirect($request->getUri());
         }
         
 
