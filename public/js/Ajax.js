@@ -8,7 +8,28 @@ class Ajax {
         this.navigation_ajax();
         this.ajax_post_submit();
     }
-
+    
+    ajax_post_contact() {
+        $('#contact form').on('submit', function(e) {
+            e.preventDefault();
+            let form = $('#contact form').get(0);
+            let url = $(this).attr("action");
+            let formData = new FormData(form);
+            $.ajax({
+                type : 'POST',
+                url : url,
+                data : formData,
+                processData: false,
+                contentType: false, 
+                success : function(data) {
+                    $('#content_contact').html('<div class="alert alert-success text-center"> Votre message a bien été envoyé.</div>');
+                },
+                error : function() {
+                    alert('Une erreur s\'est produite lors de la requête.');
+                }
+            });
+        })
+    }
      ajax_post_submit() {
          $('#submit').click((e) => {
              e.preventDefault();
@@ -35,8 +56,8 @@ class Ajax {
         $("#button_infos").on('click', () => this.ajax_cv('infos_ajax'));
         $("#button_experiences").on('click', () => this.ajax_cv('experiences_ajax'));
         $("#button_skills").on('click', () => this.ajax_cv('softskills_ajax'));
-
     }
+
     ajax_cv(url) {
         $.ajax({
             url : url,
@@ -100,28 +121,6 @@ class Ajax {
                 }
             })
         });
-    }
-    
-    ajax_post_contact() {
-        $('#contact form').on('submit', function(e) {
-            e.preventDefault();
-            let form = $('#contact form').get(0);
-            let url = $(this).attr("action");
-            let formData = new FormData(form);
-            $.ajax({
-                type : 'POST',
-                url : url,
-                data : formData,
-                processData: false,
-                contentType: false, 
-                success : function() {
-                    $('#content_contact').html('<div class="alert alert-success text-center"> Votre message a bien été envoyé.</div>');
-                },
-                error : function() {
-                    alert('Une erreur s\'est produite lors de la requête.');
-                }
-            });
-        })
     }
 
 }
