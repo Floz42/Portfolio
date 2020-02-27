@@ -6,29 +6,28 @@ class Ajax {
         this.submit_ajax();
         this.ajax_post_contact();
         this.navigation_ajax();
-        $('#subscribe form').on('submit', () => this.ajax_post_subscribe());
+        this.ajax_post_submit();
     }
 
-     ajax_post_subscribe() {
-        /*     alert('yeahhh');
-            e.preventDefault();
-            let form = $('#subscribe form').get(0);
-            console.log(form);
-            let url = $(this).attr("action");
-            let formData = new FormData(form);
-            $.ajax({
-                type : 'POST',
-                url : '/subscribe_ajax',
-                data : formData,
-                processData: false,
-                contentType: false, 
-                success : function(data) {
-                    $('#subscribe').html('<div class="alert alert-success text-center"> Votre inscription a bien été prise en compte.</div>');
-                },
-                error : function() {
-                    alert('erreur');
-                }
-            }); */
+     ajax_post_submit() {
+         $('#submit').click((e) => {
+             e.preventDefault();
+             $.post(
+                 'login',
+                 {
+                     username: $('#submit_username').val(),
+                     password: $('#submit_password').val()
+                 }, 
+                 function(data) {
+                     if(data == 'Success') {
+                         alert('Vous êtes bien connecté');
+                     } else {
+                         alert('Erreur d\'authentification)');
+                     }
+                 },
+                 'text'
+             );
+         });
     }
 
     buttons_cv_click() {
@@ -115,9 +114,12 @@ class Ajax {
                 data : formData,
                 processData: false,
                 contentType: false, 
-                success : function(data) {
+                success : function() {
                     $('#content_contact').html('<div class="alert alert-success text-center"> Votre message a bien été envoyé.</div>');
                 },
+                error : function() {
+                    alert('Une erreur s\'est produite lors de la requête.');
+                }
             });
         })
     }

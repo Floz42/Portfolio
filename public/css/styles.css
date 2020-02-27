@@ -499,3 +499,9 @@ form label {
     color: black;
     font-size: 1.4vw;
 }
+
+/************** ADMIN COMMENTS **************/
+
+#admin_comments {
+    margin-top: 2vw;
+}

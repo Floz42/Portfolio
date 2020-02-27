@@ -29,25 +29,6 @@ class MainController extends AbstractController
     public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, AuthenticationUtils $util, PaginatorInterface $paginator)
     {
 
-        $comments = $paginator->paginate(
-            $repository->paginationComments(),
-            $request->query->getInt('page', 1),
-            5
-        );
-
-        $subscribe = new Users();
-        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
-        $form_subscribe->handleRequest($request); 
-        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
-            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
-            $subscribe->setPassword($passwordCrypt);
-            $subscribe->setRoles('ROLE_USER');
-            $manager->persist($subscribe);
-            $manager->flush();
-            $this->addFlash('subscribe_success', 'Votre inscription est bien prise en compte.');
-            return $this->redirectToRoute('accueil');
-        }
-        
         $contact = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact);
 
@@ -71,6 +52,26 @@ class MainController extends AbstractController
                 );
             $mailer->send($message);
         }
+        
+        $comments = $paginator->paginate(
+            $repository->paginationComments(),
+            $request->query->getInt('page', 1),
+            3
+        );
+
+        $subscribe = new Users();
+        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
+        $form_subscribe->handleRequest($request); 
+        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
+            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
+            $subscribe->setPassword($passwordCrypt);
+            $subscribe->setRoles('ROLE_USER');
+            $manager->persist($subscribe);
+            $manager->flush();
+            //$this->addFlash('subscribe_success', 'Votre inscription est bien prise en compte.');
+            return $this->redirectToRoute('accueil');
+        }
+        
 
         return $this->render('main/cv/accueil.html.twig', [
             'form_contact' => $form_contact->createView(),
@@ -95,7 +96,7 @@ class MainController extends AbstractController
             $comment->setUsers($user);
             $manager->persist($comment);
             $manager->flush();
-            $this->addFlash('success', 'Votre message a bien été posté.');
+            //$this->addFlash('success', 'Votre message a bien été posté.');
             return $this->redirectToRoute('accueil');
         }
     }
@@ -173,7 +174,7 @@ class MainController extends AbstractController
             $subscribe->setRoles('ROLE_USER');
             $manager->persist($subscribe);
             $manager->flush();
-            $this->addFlash('success', 'Votre inscription est bien prise en compte.');
+            //$this->addFlash('success', 'Votre inscription est bien prise en compte.');
             return $this->redirectToRoute('accueil');
         }
         return $this->render('main/subscribe.html.twig', [

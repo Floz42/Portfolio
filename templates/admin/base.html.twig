@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link rel="stylesheet" href="{{ asset('css/breakpoints.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-        <link rel="shortcut icon" href="" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>{% block title %} Espace administration !{% endblock %}</title>
     </head>
@@ -26,7 +25,7 @@
                       <a class="nav-link" href="#">CV</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Commentaires</a>
+                        <a class="nav-link" href="{{ path('admin_comments') }}">Commentaires</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Utilisateurs</a>
