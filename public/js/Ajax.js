@@ -7,7 +7,14 @@ class Ajax {
         this.ajax_post_contact();
         this.navigation_ajax();
     }
-    
+
+    buttons_cv_click() {
+        $("#button_diplomes").on('click', () => this.ajax_cv('diplomes_ajax'));
+        $("#button_infos").on('click', () => this.ajax_cv('infos_ajax'));
+        $("#button_experiences").on('click', () => this.ajax_cv('experiences_ajax'));
+        $("#button_skills").on('click', () => this.ajax_cv('softskills_ajax'));
+    }
+
     ajax_post_contact() {
         $('#contact form').on('submit', function(e) {
             e.preventDefault();
@@ -30,13 +37,6 @@ class Ajax {
         })
     }
 
-    buttons_cv_click() {
-        $("#button_diplomes").on('click', () => this.ajax_cv('diplomes_ajax'));
-        $("#button_infos").on('click', () => this.ajax_cv('infos_ajax'));
-        $("#button_experiences").on('click', () => this.ajax_cv('experiences_ajax'));
-        $("#button_skills").on('click', () => this.ajax_cv('softskills_ajax'));
-    }
-
     ajax_cv(url) {
         $.ajax({
             url : url,
@@ -52,19 +52,18 @@ class Ajax {
     }
 
     navigation_ajax() {
-        $('.page-link').on('click', function(e) {
-            let url = (window.location.origin + $(this).attr("href")); 
-            console.log(url);
-            e.preventDefault();
-            $.ajax({
-                url : url,
-                type : 'GET',
-                success:function(){ 
-                    window.location.href = url;
-                },
-                error : function(resultat, statut,errur) {
-                    alert("Une erreur s'est produite lors du chargement du formulaire de connexion.");
-                } 
+        $('.page-link').each(function() {
+            $(this).on('click', function(event) {
+                event.preventDefault();
+                let url = 'http://localhost:8000/?page=2';
+                console.log(this);
+ 
+                console.log(url);
+                $.ajax({
+                    url : url,
+                    type : 'GET',
+                    dataType: 'html'
+                });
             });
         })
     }
@@ -72,7 +71,7 @@ class Ajax {
     submit_ajax() {
         $('#connexion').on('click', function() {
             $.ajax({
-                url : 'submit_ajax',
+                url : 'login',
                 type : 'GET',
                 dataType : 'html',
                 success : function(html, status){

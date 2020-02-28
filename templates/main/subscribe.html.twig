@@ -1,5 +1,8 @@
 <div id="confirm_subscribe"></div>
 <div id="subscribe" class="m-auto col-8">
+    {% for message in app.flashes('subscribe_success') %}
+        <div class="alert alert-success text-center">{{ message }}</div>
+    {% endfor %}
     {{ form_start(form_subscribe) }}        
         {{ form_row(form_subscribe.username) }}
         <div class="alert alert-danger" id="error_pseudo">Votre pseudo doit comporter au moins 5 caracères.</div>

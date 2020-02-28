@@ -26,9 +26,8 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, AuthenticationUtils $util, PaginatorInterface $paginator)
+    public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, PaginatorInterface $paginator)
     {
-
         $contact = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact);
 
@@ -59,25 +58,9 @@ class MainController extends AbstractController
             3
         );
 
-        $subscribe = new Users();
-        $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
-        $form_subscribe->handleRequest($request); 
-        if ($form_subscribe->isSubmitted() && $form_subscribe->isValid()) {
-            $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
-            $subscribe->setPassword($passwordCrypt);
-            $subscribe->setRoles('ROLE_USER');
-            $manager->persist($subscribe);
-            $manager->flush();
-            return $this->redirect($request->getUri());
-        }
-        
-
         return $this->render('main/cv/accueil.html.twig', [
             'form_contact' => $form_contact->createView(),
-            'comments' => $comments,
-            'form_subscribe' => $form_subscribe->createView(),
-            "lastUsername" => $util->getLastUsername(),
-            "error" => $util->getLastAuthenticationError()
+            'comments' => $comments
         ]);
     }
 
@@ -148,20 +131,9 @@ class MainController extends AbstractController
      }
 
     /**
-    * @Route("/login", name="login")
-    */
-    public function login(AuthenticationUtils $util) 
-    {
-        return $this->render('main/cv/accueil.html.twig', [
-            "lastUsername" => $util->getLastUsername(),
-            "error" => $util->getLastAuthenticationError()
-        ]);
-    }
-
-        /**
-     * @Route("/subscribe_ajax", name="subscribe_ajax")
+     * @Route("/subscribe_ajax", name="subscribe_ajax", methods="POST|GET")
      */
-    public function show_subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) 
+    public function show_subscribe_ajax(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) 
     {
         $subscribe = new Users();
         $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
@@ -172,18 +144,19 @@ class MainController extends AbstractController
             $subscribe->setRoles('ROLE_USER');
             $manager->persist($subscribe);
             $manager->flush();
-            //$this->addFlash('success', 'Votre inscription est bien prise en compte.');
+            $this->addFlash('success', 'Yeaaahh trop bien !!');
             return $this->redirectToRoute('accueil');
         }
+
         return $this->render('main/subscribe.html.twig', [
             'form_subscribe' => $form_subscribe->createView()
         ]);
     }
 
     /**
-     * @Route("/submit_ajax", name="submit_ajax")
+     * @Route("/login", name="login", methods="POST|GET")
      */
-    public function submit_ajax(AuthenticationUtils $util) 
+    public function login(AuthenticationUtils $util)
     {
         return $this->render('main/submit.html.twig', [
             "lastUsername" => $util->getLastUsername(),

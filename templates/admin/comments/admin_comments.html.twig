@@ -7,6 +7,7 @@
     {% endfor %}
     <div class="container" id="admin_comments" class="col-10">
         <p>Vous pouvez ici supprimer les commentaires indésirables.</p>
+        <div id="admin_delete_comment_message" class="mb-3"></div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -18,16 +19,12 @@
             </thead>
             <tbody>
                 {% for comment in comments %}
-                    <tr>
+                    <tr class="comment_id{{ comment.id }}">
                         <th>{{ comment.users.username }}</th>
                         <th>{{ comment.comment }}</th>
                         <th class="text-center">{{ comment.date_comment|date('d/m/Y') }}</th>
                         <th>
-                            <form action="{{ path('delete_comment', {'id': comment.id}) }}" method="post" onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?')">
-                                <input type="hidden" name="_method" value="SUP">
-                                <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ comment.id )}}">
-                                <input type="submit" class="btn btn-danger" value="Supprimer">
-                            </form>
+                            <a href="{{ path('delete_comment', {'id': comment.id}) }}" class="admin_delete_comment"><input type="submit" class="btn btn-danger" value="Supprimer"></a>
                         </th>
                     </tr>
                 {% endfor %}
