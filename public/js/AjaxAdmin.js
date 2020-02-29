@@ -31,8 +31,7 @@ class AjaxAdmin {
                 event.preventDefault();
                 const id = $(this).parents("th").parents("tr").attr('class');
                 const url = this.href;
-                axios.get(url).then(function(response) {
-                    $("." + id + "").val(response.data.role)
+                axios.delete(id).then(function(response) {
                     $("."+ id + "").html("");
                     $('#admin_delete_user_message').html("<div class='alert alert-success col-4 m-auto text-center'>L'utilisateur a bien été supprimé</div>");
                 }).catch(function(error) {
@@ -50,7 +49,7 @@ class AjaxAdmin {
                 const url = this.href;
                 axios.get(url).then(function(response) {
                     $("."+ id + "").html("");
-                    $('#admin_delete_user_message').html("<div class='alert alert-success col-4 m-auto text-center'>L'utilisateur a bien été supprimé</div>");
+                    $('#admin_delete_user_message').html("<div class='message_success alert alert-success col-4 m-auto text-center'>L'utilisateur a bien été supprimé</div>");
                 }).catch(function(error) {
                     alert('Une erreur s\'est produite lors de la reqûete ajax.')
                 });

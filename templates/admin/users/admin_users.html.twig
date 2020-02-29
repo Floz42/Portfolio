@@ -23,10 +23,10 @@
                         <th>{{ user.email }}</th>
                         <th class="text-center">
                             {% for role in user.roles %} 
-                                <a href="{{ path('update_user', {'id': user.id}) }}" class="admin_update_user"><input id="" type="button" value="{{ role }}" class="btn btn-primary"></th></a> 
+                                <a href="{{ path('update_user', {'id': user.id}) }}" class="admin_update_user"><input id="user_id{{ user.id }}" type="button" value="{{ role }}" class="btn btn-primary"></a> 
                             {% endfor %}
                         <th>
-                            <a href="{{ path('delete_user', {'id': user.id}) }}" class="admin_delete_user"><input type="button" value="SUPPRIMER" class="btn btn-danger"></th></a>
+                            <a href="{{ path('delete_user', {'id': user.id}) }}" class="admin_delete_user"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a>
                         </th>
                     </tr>
                 {% endfor %}

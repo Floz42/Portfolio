@@ -28,7 +28,6 @@ class UsersController extends AbstractController
      */
     public function deleteComment(Users $user, ObjectManager $manager): Response
     {
-
         $manager->remove($user);
         $manager->flush();
         return $this->json([

@@ -5,6 +5,10 @@ use App\Entity\CVDiplomes;
 use App\Entity\CVExperiences;
 use App\Entity\CVInfos;
 use App\Entity\CVSoftSkills;
+use App\Form\CvDiplomesType;
+use App\Form\CvExperiencesType;
+use App\Form\CvInfosType;
+use App\Form\CvSskillsType;
 use App\Repository\CVDiplomesRepository;
 use App\Repository\CVInfosRepository;
 use App\Repository\CVSoftSkillsRepository;
@@ -13,6 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class CVController extends AbstractController
 {
@@ -42,10 +48,11 @@ class CVController extends AbstractController
      */
     public function experiences_ajax(CVExperiencesRepository $repository)
     {
+   
         $xp = $repository->findAll();
 
         return $this->render('admin/cv/admin_cv_xp.html.twig', [
-            'xps' => $xp
+            'xps' => $xp,
         ]);
     }
 
@@ -74,26 +81,154 @@ class CVController extends AbstractController
         ]);
 
         return $this->render('admin/cv/admin_cv.html.twig');
-
     }
     
+     /**
+     * @Route("/admin/add_xp", name="add_xp", methods="GET|POST")
+     * @Route("/admin/xp/{id}", name="update_xp", methods="POST|GET")
+     */
+    public function add_xp(CVExperiences $experience = null, Request $request, ObjectManager $manager)
+    {
+        $exist = true;
+        $message = "Votre expérience a bien été modifiée.";
+        if (!$experience) {
+            $exist = false;
+            $experience = new CVExperiences();
+            $message = "Votre expérience a bien été ajoutée.";
+        }
+
+        $form = $this->createForm(CvExperiencesType::class, $experience);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($experience);
+            $manager->flush();
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('admin_cv');
+        } 
+        
+        return $this->render('admin/cv/add_xp.html.twig', [
+            'form' => $form->createView(),
+            'exist' => $exist
+        ]);
+    }
+
     /**
      * @Route("/admin/delete_xp/{id}", name="delete_xp", methods="POST|GET")
      */
-    public function delete_xp(CVExperiencesRepository $repository, CVExperiences $xp, ObjectManager $manager): Response
+    public function delete_xp(CVExperiences $xp, ObjectManager $manager): Response
     {
-        $xps = $repository->findAll();
         $manager->remove($xp);
         $manager->flush();
-        return $this->redirectToRoute('admin_cv');
+        return $this->json([
+            'id' => $xp->getId()
+        ], 200);
+    }
+
+     /**
+     * @Route("/admin/add_diplome", name="add_diplome", methods="GET|POST")
+     * @Route("/admin/diplome/{id}", name="update_diplome", methods="POST|GET")
+     */
+    public function add_diplome(CVDiplomes $diplome = null, Request $request, ObjectManager $manager)
+    {
+        $exist = true;
+        $message = "Votre diplôme a bien été modifiée.";
+        if (!$diplome) {
+            $exist = false;
+            $diplome = new CVDiplomes();
+            $message = "Votre diplôme a bien été ajoutée.";
+        }
+
+        $form = $this->createForm(CvDiplomesType::class, $diplome);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($diplome);
+            $manager->flush();
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('admin_cv');
+        } 
+        
+        return $this->render('admin/cv/add_diplome.html.twig', [
+            'form' => $form->createView(),
+            'exist' => $exist
+        ]);
     }
 
     /**
-     * @Route("/admin/update_xp/{id}", name="update_xp", methods="POST|GET")
+     * @Route("/admin/delete_diplome/{id}", name="delete_diplome", methods="POST|GET")
      */
-    public function update_xp(CVExperiences $xp)
+    public function delete_diplome(CVDiplomes $diplome, ObjectManager $manager): Response
     {
+        $manager->remove($diplome);
+        $manager->flush();
+        return $this->json([
+            'id' => $diplome->getId()
+        ], 200);
+    }
 
+    /**
+     * @Route("/admin/add_sskill", name="add_sskill", methods="GET|POST")
+     * @Route("/admin/sskill/{id}", name="update_sskill", methods="POST|GET")
+     */
+    public function add_sskill(CVSoftSkills $sskill = null, Request $request, ObjectManager $manager)
+    {
+        $exist = true;
+        $message = "Votre Softskill a bien été modifiée.";
+        if (!$sskill) {
+            $exist = false;
+            $sskill = new CVSoftSkills();
+            $message = "Votre Softskill a bien été ajoutée.";
+        }
+
+        $form = $this->createForm(CvSskillsType::class, $sskill);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($sskill);
+            $manager->flush();
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('admin_cv');
+        } 
+        
+        return $this->render('admin/cv/add_sskill.html.twig', [
+            'form' => $form->createView(),
+            'exist' => $exist
+        ]);
+    }
+
+    /**
+     * @Route("/admin/delete_sskill/{id}", name="delete_sskill", methods="POST|GET")
+     */
+    public function delete_sskill(CVSoftSkills $skill, ObjectManager $manager): Response
+    {
+        $manager->remove($skill);
+        $manager->flush();
+        return $this->json([
+            'id' => $skill->getId()
+        ], 200);
+    }
+
+    /**
+     * @Route("/admin/infos/{id}", name="update_infos", methods="POST|GET")
+     */
+    public function update_infos(CVInfos $infos , Request $request, ObjectManager $manager)
+    {
+        $message = "Vos informations ont bien été modifiées.";
+
+        $form = $this->createForm(CvInfosType::class, $infos);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($infos);
+            $manager->flush();
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('admin_cv');
+        } 
+        
+        return $this->render('admin/cv/update_infos.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 }

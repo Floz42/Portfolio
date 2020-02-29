@@ -279,7 +279,7 @@ ul {
 }
 
 .soft_skills {
-    font-size: 2vw !important;
+    font-size: 1.5vw !important;
 }
 
 /************** SKILLS **************/
@@ -524,5 +524,7 @@ form label {
 #admin_buttons_cv li {
     padding: 0.5vw;
 }
+
+
 
 

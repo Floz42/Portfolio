@@ -4,6 +4,8 @@
         Mes diplômes
     </h2>
     <div class="row align-items-center p-auto">
+    <a href="{{ path('add_diplome') }}" class="mt-3 mb-3"><input class="btn btn-primary" type="button" value="Ajouter"></a>
+
         <table class="table table-sriped">
             <thead>
                 <tr>
@@ -16,6 +18,12 @@
                     <tr>
                         <th>{{ diplome.year }}</th>
                         <th>{{ diplome.libelle }}</th>
+                        <th>
+                            <a href="{{ path('update_diplome', {'id': diplome.id }) }}" class="admin_update_diplome"><input type="button" value="MODIFIER" class="btn btn-primary"></a> 
+                        </th>
+                        <th>
+                            <a href="{{ path('delete_diplome', {'id': diplome.id }) }}" class="admin_delete_diplome"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a> 
+                        </th>
                     </tr>
                 {% endfor %}
             </tbody>

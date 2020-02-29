@@ -12,6 +12,9 @@
             <li><input type="button" id="admin_button_sskills" class="btn btn-info rounded" value="Soft Skills"></li>
         </ul>
     </div>
+    {% for message in app.flashes('success') %}
+        <div class="message_success alert alert-success mt-3 mb-3 col-5 text-center mx-auto">{{ message }}</div>
+    {% endfor %}
     <div id="admin_confirm_message_cv"></div>
     <div class="container col-10 mx-auto" id="admin_content_cv"> </div>
 </div>

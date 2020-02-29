@@ -6,6 +6,7 @@ class Effects {
         this.presentation_card();
         this.show_logo_cv();
         this.hide_logo_cv();
+        this.hide_flash_success();
     }
 
     logo_hover() {
@@ -36,5 +37,13 @@ class Effects {
         $('#download_cv').on('click', function() {
             $(this).hide("slow");
         });
+    }
+
+    hide_flash_success() {
+        if ($('.message_success')) {
+            setTimeout(() => {
+                $('.message_success').hide("slow");
+            },8000);
+        }
     }
 }
