@@ -123,7 +123,7 @@ class MainController extends AbstractController
      */
      public function infos_ajax(CVInfosRepository $repository) 
      {
-        $infos = $repository->find(2);
+        $infos = $repository->find(4);
 
         return $this->render('main/cv/infos_ajax.html.twig', [
             'infos' => $infos

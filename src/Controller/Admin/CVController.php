@@ -61,7 +61,7 @@ class CVController extends AbstractController
      */
     public function infos_ajax(CVInfosRepository $repository) 
     {
-       $infos = $repository->find(2);
+       $infos = $repository->find(4);
 
        return $this->render('admin/cv/admin_cv_infos.html.twig', [
            'infos' => $infos
@@ -120,9 +120,8 @@ class CVController extends AbstractController
     {
         $manager->remove($xp);
         $manager->flush();
-        return $this->json([
-            'id' => $xp->getId()
-        ], 200);
+        $this->addFlash('success', "L'expérience a bien été supprimée.");
+        return $this->redirectToRoute('admin_cv');
     }
 
      /**
@@ -162,9 +161,8 @@ class CVController extends AbstractController
     {
         $manager->remove($diplome);
         $manager->flush();
-        return $this->json([
-            'id' => $diplome->getId()
-        ], 200);
+        $this->addFlash('success', "Le diplôme a bien été supprimé.");
+        return $this->redirectToRoute('admin_cv');
     }
 
     /**
@@ -204,9 +202,8 @@ class CVController extends AbstractController
     {
         $manager->remove($skill);
         $manager->flush();
-        return $this->json([
-            'id' => $skill->getId()
-        ], 200);
+        $this->addFlash('success', "Le soft skill a bien été supprimé.");
+        return $this->redirectToRoute('admin_cv');
     }
 
     /**
