@@ -7,14 +7,16 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use FOS\UserBundle\Model\User as BaseUser;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  * @UniqueEntity("email", message="Cet adresse e-mail est déjà utilisée.")
  * @UniqueEntity("username", message="Ce pseudo est déjà pris.")
+ * @ORM\Table(name="fos_user")
  */
-class Users implements UserInterface
+class Users extends BaseUser
 {
     /**
      * @ORM\Id()
