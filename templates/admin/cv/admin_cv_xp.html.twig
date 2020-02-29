@@ -1,0 +1,39 @@
+
+<div class="ajax_cv_view">
+    <h2 class="text-center section_title_litle">
+        Mes expériences
+    </h2>
+    <div class="row align-items-center p-auto">
+        <table class="table table-sriped">
+            <thead>
+                <tr>
+                    <th>Année</th>
+                    <th>Expérience</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for xp in xps %}
+                    <tr class="xp_id{{ xp.id }}">
+                        <th>{{ xp.year }}</th>
+                        <th>{{ xp.name }}</th>
+                        <th>
+                            <a href="" class="admin_update_xp"><input type="button" value="MODIFIER" class="btn btn-primary"></a> 
+                        </th>
+                        <th>
+                            <a href="{{ path('delete_xp', {'id': xp.id }) }}" class="admin_delete_xp"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a> 
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+

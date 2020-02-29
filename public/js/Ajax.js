@@ -42,7 +42,7 @@ class Ajax {
             url : url,
             type : 'GET',
             dataType : 'html',
-            success : function(html, statut){ 
+            success : function(html, statut){
                 $('#cv_ajax').html(html);
             },
             error : function(resultat, statut, erreur){

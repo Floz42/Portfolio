@@ -1,0 +1,26 @@
+
+<div class="ajax_cv_view">
+    <h2 class="text-center section_title_litle">
+        Mes diplômes
+    </h2>
+    <div class="row align-items-center p-auto">
+        <table class="table table-sriped">
+            <thead>
+                <tr>
+                    <th>Année</th>
+                    <th>Diplôme</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for diplome in diplomes %}
+                    <tr>
+                        <th>{{ diplome.year }}</th>
+                        <th>{{ diplome.libelle }}</th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

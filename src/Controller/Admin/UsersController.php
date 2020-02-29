@@ -12,7 +12,7 @@ class UsersController extends AbstractController
 {
 
     /**
-     * @Route("/admin_users", name="admin_users")
+     * @Route("/admin/admin_users", name="admin_users")
      */
     public function adminUsers(UsersRepository $repository)
     {
@@ -24,7 +24,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/delete_user/{id}", name="delete_user", methods="POST|GET")
+     * @Route("/admin/delete_user/{id}", name="delete_user", methods="POST|GET")
      */
     public function deleteComment(Users $user, ObjectManager $manager): Response
     {
@@ -37,7 +37,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/update_user/{id}", name="update_user", methods="POST|GET")
+     * @Route("/admin/update_user/{id}", name="update_user", methods="POST|GET")
      */
     public function updateRole(Users $user, ObjectManager $manager): Response
     {

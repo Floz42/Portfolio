@@ -505,3 +505,24 @@ form label {
 #admin_comments {
     margin-top: 2vw;
 }
+
+/************** ADMIN CV **************/
+
+#admin_buttons_cv {
+    display: flex; 
+    justify-content: center;
+    padding: 1vw; 
+    border: 1px solid silver;
+    border-radius: 25px;
+}
+
+.admin_buttons_cv {
+    display: flex; 
+    justify-content: center;
+}
+
+#admin_buttons_cv li {
+    padding: 0.5vw;
+}
+
+

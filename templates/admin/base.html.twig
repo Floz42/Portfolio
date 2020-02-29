@@ -18,11 +18,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                       <a class="nav-link" href="{{ path('admin_accueil') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">CV</a>
+                      <a class="nav-link" href="{{ path('admin_cv') }}">CV</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_comments') }}">Commentaires</a>
@@ -31,6 +31,16 @@
                         <a class="nav-link" href="{{ path('admin_users') }}">Utilisateurs</a>
                     </li>
                 </div>
+                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ path('accueil') }}" title="Retour au site"><i class="back_site fas fa-undo"></i></i></a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ path('logout') }}" title="Se déconnecter"><i class="fas fa-sign-out-alt"></i></a>
+                      </li>
+                  </ul>
+              </div>
               </nav>
          </header>
         {% block body %}{% endblock %}
@@ -41,8 +51,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="{{ asset('/js/main.js') }}"></script>
-        <script src="{{ asset('/js/Effects.js') }}"></script>
         <script src="{{ asset('/js/AjaxAdmin.js') }}"></script>
+        <script src="{{ asset('/js/Effects.js') }}"></script>
+
 
     </body>
 </html>
