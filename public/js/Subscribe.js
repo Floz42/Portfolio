@@ -6,12 +6,11 @@ class Subscribe {
         $('#subscribe form').on('submit', (e) => { 
             if (this.verify() == false) {
                 e.preventDefault();
-            }
+            } 
         });
     }
 
     verify() {
-            console.log($('#inscription_username').val().length);
             let isValid = true;
             if ($('#inscription_username').val().length < 5) {
                 isValid = false;
@@ -25,7 +24,6 @@ class Subscribe {
                 isValid = false;
                 $('#error_password_verify').show();;
             } 
-            console.log(isValid);
             return isValid;
     }
 }

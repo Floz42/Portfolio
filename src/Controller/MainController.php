@@ -104,6 +104,23 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/change_page_comments", name="change_page_comments", methods="GET|POST")
+     */
+    public function change_page_comments(CommentsRepository $repository, PaginatorInterface $paginator, Request $request)
+    {
+        $i = $_POST['page'];
+        $comments = $paginator->paginate(
+            $repository->paginationComments(),
+            $request->query->getInt('page', $i),
+            3
+        );
+        $i = '';
+        return $this->render('main/post_comments.html.twig', [
+            'comments' => $comments 
+        ]);   
+    }
+
+    /**
      * @Route("/diplomes_ajax", name="diplomes_ajax")
      */
     public function cv_diplomes(CVDiplomesRepository $repository)
@@ -165,7 +182,10 @@ class MainController extends AbstractController
             $subscribe->setRoles('ROLE_USER');
             $manager->persist($subscribe);
             $manager->flush();
-            $this->addFlash('success', 'Yeaaahh trop bien !!');
+            $this->addFlash('success_confirm', 'Votre inscription est bien prise en compte, vous pouvez maintenant vous connecter.');
+            return $this->redirectToRoute('accueil');
+        } elseif ($form_subscribe->isSubmitted() && !$form_subscribe->isValid()) {
+            $this->addFlash('error_confirm', 'Votre pseudo est déjà pris, merci d\'en choisir un autre.');
             return $this->redirectToRoute('accueil');
         }
 
@@ -179,6 +199,10 @@ class MainController extends AbstractController
      */
     public function login(AuthenticationUtils $util)
     {
+        if ($util->getLastAuthenticationError()) {
+            $this->addFlash('error_confirm', 'Erreur : mauvais pseudo et/ou mot de passe');
+            return $this->redirectToRoute('accueil');
+        } 
         return $this->render('main/submit.html.twig', [
             "lastUsername" => $util->getLastUsername(),
             "error" => $util->getLastAuthenticationError()
