@@ -24,9 +24,9 @@ class MainController extends AbstractController
 {
 
     /**
-     * @Route("/", name="accueil")
+     * @Route("/", name="accueil", methods="POST|GET")
      */
-    public function index(Request $request, \Swift_Mailer $mailer, ObjectManager $manager, UserPasswordEncoderInterface $encoder, CommentsRepository $repository, PaginatorInterface $paginator)
+    public function index(Request $request, \Swift_Mailer $mailer, CommentsRepository $repository, PaginatorInterface $paginator)
     {
         $contact = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact);
@@ -66,20 +66,41 @@ class MainController extends AbstractController
 
 
     /**
-     * @Route("/post_comment", name="post_comment")
+     * @Route("/post_comment", name="post_comment", methods="POST|GET")
      */
-    public function post_comment(ObjectManager $manager)
+    public function post_comment(Request $request, ObjectManager $manager, CommentsRepository $repository, PaginatorInterface $paginator)
     {
         $user = $this->getUser();
         $comment = new Comments();
-        if (!empty($_POST['comment'])) {
-            $comment->setComment($_POST['comment']);
+            $comment->setComment($_POST['message']);
             $comment->setDate_comment(new \DateTime());
             $comment->setUsers($user);
             $manager->persist($comment);
             $manager->flush();
-            return $this->redirectToRoute('accueil');
-        }
+
+            $comments = $paginator->paginate(
+                $repository->paginationComments(),
+                $request->query->getInt('page', 1),
+                3
+            );
+            return $this->render('main/comments.html.twig', [
+                'comments' => $comments 
+            ]);
+    }
+
+    /**
+     * @Route("/show_comments", name="show_comments")
+     */
+    public function show_comments(PaginatorInterface $paginator, Request $request, CommentsRepository $repository)
+    {
+        $comments = $paginator->paginate(
+            $repository->paginationComments(),
+            $request->query->getInt('page', 1),
+            3
+        );
+        return $this->render('main/post_comments.html.twig', [
+            'comments' => $comments 
+        ]);   
     }
 
     /**

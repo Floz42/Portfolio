@@ -15,6 +15,7 @@ class InscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setAction('subscribe_ajax')
             ->add('username', TextType::class, [
                 'label' => 'Pseudo :'
             ])

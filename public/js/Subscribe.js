@@ -28,8 +28,6 @@ class Subscribe {
             console.log(isValid);
             return isValid;
     }
-
-
 }
 
 const subscribe = new Subscribe();

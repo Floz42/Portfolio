@@ -6,6 +6,7 @@ class Ajax {
         this.submit_ajax();
         this.ajax_post_contact();
         this.navigation_ajax();
+        this.post_comment_ajax();
     }
 
     buttons_cv_click() {
@@ -28,10 +29,12 @@ class Ajax {
                 processData: false,
                 contentType: false, 
                 success : function(data) {
-                    $('#content_contact').html('<div class="alert alert-success text-center"> Votre message a bien été envoyé.</div>');
                 },
                 error : function() {
                     alert('Une erreur s\'est produite lors de la requête.');
+                }, 
+                complete : function(){
+                    $('#content_contact').html('<div class="alert alert-success text-center"> Votre message a bien été envoyé.</div>');
                 }
             });
         })
@@ -85,7 +88,7 @@ class Ajax {
     }
 
     subscribe_ajax() {
-        $('#register').on('click', function(e) {
+        $('#register').on('click', function() {
             $.ajax({
                 url : 'subscribe_ajax',
                 type : 'GET',
@@ -99,6 +102,45 @@ class Ajax {
                 }
             })
         });
+    }
+    
+    post_comment_ajax() {
+        $('#button_confirm_comment').on('click', function(e) {
+            e.preventDefault();
+            let message = encodeURIComponent($("#put_message").val());
+            if ($("#put_message").val() === '') {
+                $('#all_messages').html("<div class='message_error alert alert-danger col-10 m-auto text-center'>Erreur : la zone de commentaire est vide.</div>");
+            } else {
+                $.ajax({
+                    url : 'post_comment',
+                    type : 'POST',
+                    data : 'message=' + message,
+                    success : function(html) {
+                        $('#put_message').val('');
+                        $.ajax({
+                            url : 'show_comments',
+                            type : 'GET',
+                            success : function(html) {
+                                console.log(html);
+                                $('#container_comments').html(html);
+                            },
+                            error : function() {
+                                alert('erreur');
+                            }
+                        })
+
+                    }, 
+                    error : function() {
+                        $('#all_messages').html("<div class='message_error alert alert-danger col-10 m-auto text-center'>Une erreur s'est produite.</div>").fadeOut(8000);
+                        alert('Une erreur s\'est produite.');
+                    },
+                    complete : function() {
+                        $('#all_messages').css({'display': 'initial', 'margin-top': '2em !important'});
+                        $('#all_messages').html("<div class='message_success alert alert-success col-10 m-auto text-center'>Votre commentaire a bien été posté.</div>").fadeOut(8000);
+                    }
+                })
+            }
+        })
     }
 
 }

@@ -1,0 +1,16 @@
+<div class="container" id="container_comments">
+    {% for comment in comments %}
+    <div class="row">
+        <div class="row col-12">
+             Posté le {{ comment.date_comment|date('d/m/Y') }} par : {{ comment.users.username }}
+        </div>
+        <div class="row col-12">
+            {{ comment.comment }}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    <div class="navigation">
+        {{ knp_pagination_render(comments) }}
+    </div>
+</div>
