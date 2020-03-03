@@ -217,6 +217,4 @@ class MainController extends AbstractController
         $this->addFlash('success', 'Vous êtes bien déconnecté.');
         return $this->redirectToRoute('accueil');
     }
-
-
 }

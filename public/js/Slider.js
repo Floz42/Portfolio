@@ -78,7 +78,7 @@ class Slider {
                 $('#large_image').css('display', 'inherit');
                 $('#large_picture').html('<img src="' + attribut + '">');
                 $('.informations_project').css('display', 'none');
-                $('html, body').animate({scrollTop:$(".thumbnails").offset().top }, 1000);
+                $('html, body').animate({scrollTop:$(".thumbnails").offset().top - 130}, 1000);
             })
             $('#close_image').on('click', function() {
                 $('#large_image').css('display', 'none');

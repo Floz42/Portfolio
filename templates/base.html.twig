@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta name="author" content="Florian THIEBAUD" />
-        <meta name="copyright" content="©2019 Floz " />
+        <meta name="copyright" content="©2020 Floz" />
         <meta name="description" content="Bienvenue sur mon site. Vous pourrez ici me découvrir à ravers un CV dynamique et mon Portfolio." />
         <meta name="keywords" content="developper,développeur,web,php,poo,symfony,backend,france,loire,lyon,saint-etienne" />
         <meta charset="UTF-8" />
@@ -20,21 +20,36 @@
     </head>
     <body>
         <header>
-            <div id="navbar" class="container-fluid">
+            <nav id="navbar" class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark">
                 <a href="{{ path('admin_accueil') }}"><img id="logo1" src="{{ asset('/images/logo.png') }}" class="img-fluid" alt="logo"></a>
-                <div></div>
-                <ul class="row col-xs-12">
-                    <a href=""><li>ACCUEIL</li></a>
-                    <a href=""><li>MON CV</li></a>
-                    <a href=""><li>MES COMPÉTENCES</li></a>
-                    <a href=""><li>MON PORTFOLIO</li></a>
-                </ul>
-            </div>
-        </header>
-            <div id="download_cv">
-                CV
-                <i class="fas fa-download"></i>
-            </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="">ACCUEIL</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="scrollTo" href="#item-scroll1">MON CV</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="scrollTo" href="#item-scroll2">MES COMPÉTENCES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="scrollTo" href="#item-scroll3">MON PORTFOLIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="scrollTo" href="#item-scroll4">CONTACT</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>   
+        <div id="download_cv">
+            CV
+            <i class="fas fa-download"></i>
+        </div> -->
         <div id="presentation" class="container-fluid">
             <div id="presentation_card">
                 <h1 class="animated bounceInDown title_presentation">
@@ -43,7 +58,7 @@
                 <p class="animated bounceInUp text_presentation">
                    Développeur Web Junior
                 </p>
-                <input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-12">
+                <a class="scrollTo" href="#item-scroll4"><input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-3"></a>
             </div>
             <div id="presentation_card2">
                 <div class="profil">
@@ -53,7 +68,7 @@
                 <p class="mt-2 animated bounceInUp text_presentation2">
                    Fraîchement diplômé de la formation DWJ d'OpenClassRooms, j'ai une forte appétence pour les langages backend et notamment Symfony, tout en m'intéressant aux langages frontend.
                 </p>
-                <input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-12">
+                <a class="scrollTo" href="#item-scroll4"><input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-3"></a>
             </div>
         </div>
         {% for message in app.flashes('success_confirm') %}
@@ -63,14 +78,22 @@
             <div class="alert alert-danger col-8 m-auto text-center">{{ message }}</div>
         {% endfor %}
         {% include 'main/introduce_me.html.twig' %}
+        <div id="item-scroll1"></div>
         {% include 'main/cv.html.twig' %}
+        <div id="item-scroll2"></div>
         {% include 'main/skills.html.twig' %}
+        <div id="item-scroll3"></div>
         {% include 'main/projects_slider.html.twig' %}
+        <div id="item-scroll4"></div>
         <div class="row container m-auto" id="contact_comments">
             {% include 'main/contact.html.twig' %}
             {% include 'main/comments.html.twig' %}
         </div>
-
+        <footer class="footer mt-5 bg-dark p-2 text-center">
+            <div class="container">
+              <span class="text-muted">©2020 Florian THIEBAUD <div><a id="linkedin" href="https://www.linkedin.com/in/florian-thiebaud-409a34103/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></div></span>
+            </div>
+          </footer>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

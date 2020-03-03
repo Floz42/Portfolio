@@ -1,12 +1,12 @@
 
 <div class="ajax_cv_view">
-    <h2 class="text-center section_title_litle mb-5">
+    <h2 class="text-center section_title_litle mb-2">
         Mes Soft Skills
     </h2>
-    <div class="row align-items-center m-auto p-auto">
+    <div class="row align-items-center text-center mx-auto p-auto">
         {% for softskill in softskills %}
-            <div class="m-1">
-                <div class="col-12 soft_skills m-auto badge {{ random(['badge-primary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info']) }}">{{ softskill.name }}</div>
+            <div class="mx-auto  mb-1 col-12">
+                <div class="soft_skills badge {{ random(['badge-primary', 'badge-success', 'badge-danger', 'badge-warning', 'badge-info']) }}">{{ softskill.name }}</div>
             </div>
         {% endfor %}
     </div>

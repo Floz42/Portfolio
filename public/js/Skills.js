@@ -50,8 +50,6 @@ class Skills {
                 this.active = true;
 
             }
-
-
         }
     }
 }

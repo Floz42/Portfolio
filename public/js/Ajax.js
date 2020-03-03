@@ -106,7 +106,8 @@ class Ajax {
                 type : 'POST',
                 dataType : 'html',
                 success : function(html, status){
-                    $('#form_subscribe').html(html);
+                    $('#form_submit').html("");
+                    $('#form_submit').html(html);
                     const subscribe = new Subscribe();
                 },
                 error : function(resultat, statut,errur) {

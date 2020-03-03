@@ -7,6 +7,7 @@ class Effects {
         this.show_logo_cv();
         this.hide_logo_cv();
         this.hide_flash_success();
+        this.scrollTo_anchor()
     }
 
     logo_hover() {
@@ -45,5 +46,13 @@ class Effects {
                 $('.message_success').hide("slow");
             },8000);
         }
+    }
+
+    scrollTo_anchor() {
+            $('.scrollTo').on('click', function() {
+                let anchor = $(this).attr('href');
+                $('html, body').animate({ scrollTop: $(anchor).offset().top - 80 }, 1000 );
+                return false;
+            });
     }
 }

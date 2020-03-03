@@ -1,4 +1,4 @@
-<div class="col-md-6 col-lg-6 col-xs-12 m-auto" id="comments">
+<div class="col-md-12 col-lg-6 col-xs-12 m-auto" id="comments">
     <h2 class="section_comments text-center mb-3"><img class="mr-2" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">LAISSER UN COMMENTAIRE :</h2>
     {% if not app.user %}
         <div id="comments_links" class="text-center m-auto">
@@ -22,7 +22,6 @@
     {% endif %}
     <div id="all_messages"></div>
     <div id="form_submit"></div>
-    <div id="form_subscribe"></div>
     <p class="mt-5">Liste des commentaires : </p>
     <hr>
     <div class="container" id="container_comments">
@@ -37,7 +36,7 @@
         </div>
         <hr>
         {% endfor %}
-        <div class="navigation">
+        <div class="navigation col-xs-12">
             {{ knp_pagination_render(comments) }}
         </div>
     </div>

@@ -1,20 +1,102 @@
 @media all and (max-width: 425px) {
+
     #presentation {
-        margin-top: 30px;
+        margin-top: 20px;
+    }
+    .section_title, .section_title_litle {
+        font-size: 5vw;
+    }
+    .section_title_litle {
+        margin-top: 2vw;
+    }
+    #presentation_card2 {
+        width: 60%;
+    }
+    .title_presentation2 {
+        font-size: 5vw;
+        margin-left: 2vw !important;
+    }
+    #logo1 {
+        width: 18vw !important; 
+    }
+    .text_presentation, .text_presentation2 {
+        font-size: 2.5vw;
+    }
+    .btn_contact {
+        font-size: 1.5vw !important;
+        width: 30% !important;
+        height: auto;
+        padding: 0.5vw !important;
     }
 }
 
-@media all and (max-width: 768px) {
-    #presentation {
-        margin-top: 50px;
+@media all and (max-width: 769px) {
+    #logo1 {
+        width: 10vw; 
     }
-    .img_project {
-        margin-top: 2em;
-        width: 200px;
-        height: 150px;
+    #presentation {
+        margin-top: 30px;
+    }
+    #navbar ul {
+        font-size: 2.5vw;
     }
     #download_cv {
         padding: 0.8em;
         font-size: 0.8em;
+    }
+    .projects {
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+    }
+    .cv_infos_section {
+        margin-top: 2vw;
+        display: flex; 
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    #cv_infos_picture {
+        display: flex; 
+        justify-content: center;
+    }
+    #buttons_cv {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #buttons_cv .btn {
+        margin: 0.2vw;
+    }
+    .soft_skills {
+        font-size: 2.5vw !important;
+    }
+    .ajax_cv_view {
+        margin-top: 2vw;
+    }
+    #skills {
+        margin-bottom: 2vw !important;
+    }
+
+    .horizontal_line_left {
+        transform: translateX(-55px) translateY(-15px);
+        width: 80px;
+    }
+    
+    .horizontal_line_right {
+        transform: translateX(55px) translateY(-15px);
+        width: 80px;
+    }
+    .language_skills_right {
+        transform: translateX(80px) translateY(-40px);
+    }
+    
+    .language_skills_left {
+        transform: translateX(-80px) translateY(-40px);
+    } 
+
+    .framework {
+        transform: translateY(-80px);
     }
 }
