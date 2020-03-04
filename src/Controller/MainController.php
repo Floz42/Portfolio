@@ -64,7 +64,6 @@ class MainController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/post_comment", name="post_comment", methods="POST|GET")
      */

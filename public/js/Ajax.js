@@ -42,6 +42,7 @@ class Ajax {
     }
 
     ajax_cv(url) {
+        $('#cv_ajax').html('<div class="col-5 text-center loading alert alert-info p-2 align-items-center mx-auto">Chargement en cours...</div>');
         $.ajax({
             url : url,
             type : 'GET',
@@ -84,6 +85,7 @@ class Ajax {
 
     submit_ajax() {
         $('#connexion').on('click', function() {
+            $('#form_submit').html('<div class="col-5 text-center loading alert alert-info p-2 align-items-center mt-2 mx-auto">Chargement en cours...</div>');
             $.ajax({
                 url : 'login',
                 type : 'GET',
@@ -101,6 +103,7 @@ class Ajax {
 
     subscribe_ajax() {
         $('#register').on('click', function() {
+            $('#form_submit').html('<div class="col-5 text-center loading alert alert-info p-2 align-items-center mt-2 mx-auto">Chargement en cours...</div>');
             $.ajax({
                 url : 'subscribe_ajax',
                 type : 'POST',

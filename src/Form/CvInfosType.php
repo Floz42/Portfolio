@@ -17,7 +17,7 @@ class CvInfosType extends AbstractType
             ->add('lastname')
             ->add('phone')
             ->add('email')
-            ->add('picture')
+            ->add('imageFile', FileType::class, ['required'=>false])
             ->add('age')
         ;
     }

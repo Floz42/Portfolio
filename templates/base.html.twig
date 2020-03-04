@@ -21,7 +21,7 @@
     <body>
         <header>
             <nav id="navbar" class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark">
-                <a href="{{ path('admin_accueil') }}"><img id="logo1" src="{{ asset('/images/logo.png') }}" class="img-fluid" alt="logo"></a>
+                {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('admin_accueil') }}">{% endif %}<img id="logo1" src="{{ asset('/images/logo.png') }}" class="img-fluid" alt="logo"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
