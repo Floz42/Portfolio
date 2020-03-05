@@ -2,7 +2,7 @@
 {% block body %}
 <div class="container-fluid">
     <h2 class="text-center mt-3 mb-5">Bienvenue dans l'espace administration du Portfolio</h2>
-    <div id="admin_accueil" class="col-8 m-auto">
+    <div id="admin_accueil" class="col-md-8 col-xs-12 m-auto">
         <img class="" style="opacity:0.5" src="{{ asset('images/bird.png')}}" alt="bird">
         <div class="row m-auto">
             <p>Dans cet espace vous pourrez effectuer différentes actions.</p>
@@ -20,6 +20,6 @@
             <p><strong class="color_blue">CV : </strong> C'est ici que vous pourrez manipuler toutes les données de votre CV, Que ce soit au niveau des expériences, soft-skills etc...</p>
         </div>
     </div>
-    <a id="admin_message_logout" href="{{ path('logout')}}"><div class="alert alert-danger mt-5 col-6 text-center rounded">Si vous avez attérit sur cette page par erreur merci de cliquer ici.</div></a>
+    <a id="admin_message_logout" href="{{ path('logout')}}"><div class="alert alert-danger mt-5 col-md-6 col-xs-12 text-center rounded">Si vous avez attérit sur cette page par erreur merci de cliquer ici.</div></a>
 </div>
 {% endblock %}

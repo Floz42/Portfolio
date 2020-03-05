@@ -18,11 +18,9 @@
                     <tr>
                         <th>{{ diplome.year }}</th>
                         <th>{{ diplome.libelle }}</th>
-                        <th>
-                            <a href="{{ path('update_diplome', {'id': diplome.id }) }}" class="admin_update_diplome"><input type="button" value="MODIFIER" class="btn btn-primary"></a> 
-                        </th>
-                        <th>
-                            <a href="{{ path('delete_diplome', {'id': diplome.id }) }}" class="admin_delete_diplome"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a> 
+                        <th class="margin_button_xs">
+                            <a href="{{ path('update_diplome', {'id': diplome.id }) }}" class="mb-1 admin_update_diplome"><input type="button" value="MODIFIER" class="btn btn-primary"></a> 
+                            <a href="{{ path('delete_diplome', {'id': diplome.id }) }}" class="mt-1 admin_delete_diplome"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a> 
                         </th>
                     </tr>
                 {% endfor %}

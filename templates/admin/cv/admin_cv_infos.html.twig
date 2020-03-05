@@ -2,9 +2,9 @@
 <div class="ajax_cv_view">
     <div class="row align-items-center mx-auto p-auto">
         <div class="col-3">
-            <img src="{{ asset('/images/' ~ infos.picture)}}" alt="profil" class="cv_infos_picture">
         </div>
-        <div class="col-9 text-center">
+        <div class="col-12 text-center">
+            <img src="{{ asset('/images/' ~ infos.picture)}}" alt="profil" class="mb-3 cv_infos_picture">
             <h2 class="section_title">
                 {{ infos.name }}
                 {{ infos.lastname }}
@@ -19,6 +19,8 @@
                 <i class="blue_icon far fa-envelope"></i> E-mail : {{ infos.email }} 
             </h5>
         </div>
+    </div>
+    <div class="row mx-auto mt-3">
         <a href="{{ path('update_infos', {'id': infos.id }) }}" class="mx-auto mt-3 mb-3"><input class="btn btn-primary" type="button" value="Modifier"></a>
     </div>
 </div>

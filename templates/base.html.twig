@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{ asset('css/breakpoints.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-        <link rel="shortcut icon" href="" />
+        <link rel="shortcut icon" href="{{ asset('images/bird.ico') }}" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>{% block title %} Floz Workshop !{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
@@ -31,25 +31,28 @@
                             <a href="">ACCUEIL</a>
                         </li>
                         <li class="nav-item">
-                            <a class="scrollTo" href="#item-scroll1">MON CV</a>
+                            <a class="scrollTo" href="#item-cv">MON CV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="scrollTo" href="#item-scroll2">MES COMPÉTENCES</a>
+                            <a class="scrollTo" href="#item-skills">MES COMPÉTENCES</a>
                         </li>
                         <li class="nav-item">
-                            <a class="scrollTo" href="#item-scroll3">MON PORTFOLIO</a>
+                            <a class="scrollTo" href="#item-portfolio">MON PORTFOLIO</a>
                         </li>
                         <li class="nav-item">
-                            <a class="scrollTo" href="#item-scroll4">CONTACT</a>
+                            <a class="scrollTo" href="#item-contact">CONTACT</a>
                         </li>
                     </ul>
                 </div>
             </nav>
-        </header>   
-        <div id="download_cv">
-            CV
-            <i class="fas fa-download"></i>
-        </div> -->
+        </header>
+        {% block errorpage %}{% endblock %}
+        <a href="http://floz-workshop.fr/CV_THIEBAUD_FLORIAN_2020.pdf" target="_blank" rel="noopener noreferrer">
+            <div id="download_cv">
+                CV
+                <i class="fas fa-download"></i>
+            </div>
+        </a>
         <div id="presentation" class="container-fluid">
             <div id="presentation_card">
                 <h1 class="animated bounceInDown title_presentation">
@@ -68,7 +71,7 @@
                 <p class="mt-2 animated bounceInUp text_presentation2">
                    Fraîchement diplômé de la formation DWJ d'OpenClassRooms, j'ai une forte appétence pour les langages backend et notamment Symfony, tout en m'intéressant aux langages frontend.
                 </p>
-                <a class="scrollTo" href="#item-scroll4"><input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-3"></a>
+                <a class="scrollTo" href="#item-contact"><input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-3"></a>
             </div>
         </div>
         {% for message in app.flashes('success_confirm') %}
@@ -78,13 +81,13 @@
             <div class="alert alert-danger col-8 m-auto text-center">{{ message }}</div>
         {% endfor %}
         {% include 'main/introduce_me.html.twig' %}
-        <div id="item-scroll1"></div>
+        <div id="item-cv"></div>
         {% include 'main/cv.html.twig' %}
-        <div id="item-scroll2"></div>
+        <div id="item-skills"></div>
         {% include 'main/skills.html.twig' %}
-        <div id="item-scroll3"></div>
+        <div id="item-portfolio"></div>
         {% include 'main/projects_slider.html.twig' %}
-        <div id="item-scroll4"></div>
+        <div id="item-contact"></div>
         <div class="row container m-auto" id="contact_comments">
             {% include 'main/contact.html.twig' %}
             {% include 'main/comments.html.twig' %}
@@ -93,7 +96,7 @@
             <div class="container">
               <span class="text-muted">©2020 Florian THIEBAUD <div><a id="linkedin" href="https://www.linkedin.com/in/florian-thiebaud-409a34103/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></div></span>
             </div>
-          </footer>
+        </footer>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -103,14 +106,5 @@
         <script src="{{ asset('/js/Skills.js') }}"></script>
         <script src="{{ asset('/js/Ajax.js') }}"></script>
         <script src="{{ asset('/js/Slider.js') }}"></script>
-
-
-
-
-
     </body>
 </html>
-
-<script>
-
-</script>

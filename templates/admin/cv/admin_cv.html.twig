@@ -3,19 +3,19 @@
 
 <div class="container-fluid">
     <h2 class="text-center mt-3 mb-5">Gestion du CV :</h2>
-    <p>Dans cette section il est question de l'administration du CV et de toutes ses parties.</p>
-    <div class="row col-6 admin_buttons_cv m-auto">
+    <p class="col-xs-12">Dans cette section il est question de l'administration du CV et de toutes ses parties.</p>
+    <div class="row col-md-6 col-xs-12 admin_buttons_cv m-auto">
         <ul id="admin_buttons_cv">
-            <li><input type="button" id="admin_button_infos" class="btn btn-primary rounded" value="Informations"></li>
-            <li><input type="button" id="admin_button_diplomes" class="btn btn-success rounded" value="Diplômes"></li>
-            <li><input type="button" id="admin_button_xp" class="btn btn-warning rounded" value="Expériences"></li>
-            <li><input type="button" id="admin_button_sskills" class="btn btn-info rounded" value="Soft Skills"></li>
+            <li class="col-xs-6"><input type="button" id="admin_button_infos" class="btn btn-primary rounded" value="Informations"></li>
+            <li class="col-xs-6"><input type="button" id="admin_button_diplomes" class="btn btn-success rounded" value="Diplômes"></li>
+            <li class="col-xs-6"><input type="button" id="admin_button_xp" class="btn btn-warning rounded" value="Expériences"></li>
+            <li class="col-xs-6"><input type="button" id="admin_button_sskills" class="btn btn-info rounded" value="Soft Skills"></li>
         </ul>
     </div>
     {% for message in app.flashes('success') %}
-        <div class="message_success alert alert-success mt-3 mb-3 col-5 text-center mx-auto">{{ message }}</div>
+        <div class="message_success alert alert-success mt-3 mb-3 col-md-5 col-xs-10 text-center mx-auto">{{ message }}</div>
     {% endfor %}
     <div id="admin_confirm_message_cv"></div>
-    <div class="container col-10 mx-auto" id="admin_content_cv"> </div>
+    <div class="container col-md-10 col-xs-12 mx-auto" id="admin_content_cv"> </div>
 </div>
 {% endblock %}

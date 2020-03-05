@@ -40,13 +40,11 @@ ul {
 .section_title {
     font-family: 'Poppins-Bold';
     color: rgb(92, 173, 211);
-    font-size: 3vw;
 }
 
 .section_title_litle {
     font-family: 'Poppins-Bold';
     color: rgb(92, 173, 211);
-    font-size: 2vw;
 }
 
 #download_cv {
@@ -62,6 +60,7 @@ ul {
     border-radius: 25px 0 0 25px;
     background-color: rgb(92, 173, 211);
     z-index: 100;
+    cursor: pointer;
 }
 
 #download_cv:hover {
@@ -78,6 +77,11 @@ ul {
 #linkedin {
     text-decoration: none;
     color: silver;
+}
+
+#download_cv {
+    color: black;
+    text-decoration: none;
 }
 
 @keyframes opacity {
@@ -259,7 +263,7 @@ ul {
 }
 
 .cv_infos_picture {
-    width: 100;
+    width: 200px;
     height: auto;
     border-radius: 50%;
 }
@@ -443,7 +447,6 @@ form label {
 .section_comments {
     font-family: 'Poppins-Bold';
     color: rgb(92, 173, 211);
-    font-size: 2.5vw;
 }
 
 #comments_links {
@@ -483,13 +486,18 @@ form label {
 #admin_message_logout {
     display: flex; 
     justify-content: center;
-    margin-top: 3vw;
+    margin-top: 1vw;
     text-decoration: none;
 }
 
 #admin_message_logout div:hover {
     color: black;
     font-size: 1.4vw;
+}
+
+.margin_button_xs {
+    display: flex;
+    flex-direction: column; 
 }
 
 /************** ADMIN COMMENTS **************/

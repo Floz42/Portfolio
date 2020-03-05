@@ -8,30 +8,33 @@
     <div class="container" id="admin_users" class="col-10">
         <p>Vous pouvez ici supprimer des utilisateurs ou changer leur rôle.</p>
         <div id="admin_delete_user_message" class="mb-3"></div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Pseudo : </th>
-                    <th style="width: 50%">E-mail : </th>
-                    <th>Rôle :</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                    <tr class="user_id{{ user.id }}">
-                        <th>{{ user.username }}</th>
-                        <th>{{ user.email }}</th>
-                        <th class="text-center">
-                            {% for role in user.roles %} 
-                                <a href="{{ path('update_user', {'id': user.id}) }}" class="admin_update_user"><input id="user_id{{ user.id }}" type="button" value="{{ role }}" class="btn btn-primary"></a> 
-                            {% endfor %}
-                        <th>
-                            <a href="{{ path('delete_user', {'id': user.id}) }}" class="admin_delete_user"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a>
-                        </th>
+        <div class="table table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Pseudo : </th>
+                        <th style="width: 50%">E-mail : </th>
+                        <th>Rôle :</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr class="user_id{{ user.id }}">
+                            <th>{{ user.username }}</th>
+                            <th>{{ user.email }}</th>
+                            <th class="text-center">
+                                {% for role in user.roles %} 
+                                    <a href="{{ path('update_user', {'id': user.id}) }}" class="admin_update_user"><input id="user_id{{ user.id }}" type="button" value="{{ role }}" class="btn btn-primary"></a> 
+                                {% endfor %}
+                            </th>
+                            <th>
+                                <a href="{{ path('delete_user', {'id': user.id}) }}" class="admin_delete_user"><input type="button" value="SUPPRIMER" class="btn btn-danger"></a>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}

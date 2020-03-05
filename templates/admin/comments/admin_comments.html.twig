@@ -8,28 +8,30 @@
     <div class="container" id="admin_comments" class="col-10">
         <p>Vous pouvez ici supprimer les commentaires indésirables.</p>
         <div id="admin_delete_comment_message" class="mb-3"></div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Pseudo : </th>
-                    <th style="width: 50%">Commentaire : </th>
-                    <th class="text-center">Date du commentaire : </th>
-                    <th>Action :</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for comment in comments %}
-                    <tr class="comment_id{{ comment.id }}">
-                        <th>{{ comment.users.username }}</th>
-                        <th>{{ comment.comment }}</th>
-                        <th class="text-center">{{ comment.date_comment|date('d/m/Y') }}</th>
-                        <th>
-                            <a href="{{ path('delete_comment', {'id': comment.id}) }}" class="admin_delete_comment"><input type="submit" class="btn btn-danger" value="Supprimer"></a>
-                        </th>
+        <div class="table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Pseudo</th>
+                        <th style="width: 70%">Commentaire</th>
+                        <th class="text-center">Date du commentaire</th>
+                        <th>Action</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                        <tr class="comment_id{{ comment.id }}">
+                            <th>{{ comment.users.username }}</th>
+                            <th>{{ comment.comment }}</th>
+                            <th class="text-center">{{ comment.date_comment|date('d/m/Y') }}</th>
+                            <th>
+                                <a href="{{ path('delete_comment', {'id': comment.id}) }}" class="admin_delete_comment"><input type="submit" class="btn btn-danger" value="Supprimer"></a>
+                            </th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}
