@@ -2,6 +2,7 @@
 
     #presentation {
         margin-top: 20px;
+        height: 400px;
     }
     .section_title, .section_title_litle {
         font-size: 5vw;
@@ -16,15 +17,18 @@
         font-size: 5vw;
         margin-left: 2vw !important;
     }
+    .title_presentation {
+        font-size: 5vw;
+    }
     #logo1 {
         width: 18vw !important; 
     }
     .text_presentation, .text_presentation2 {
-        font-size: 2.5vw;
+        font-size: 4vw;
     }
     .btn_contact {
-        font-size: 1.5vw !important;
-        width: 30% !important;
+        font-size: 3.5vw !important;
+        width: 40% !important;
         height: auto;
         padding: 0.5vw !important;
     }
@@ -34,8 +38,20 @@
         align-items: center;
         padding: 3vw;
     }
+    .section_title {
+        margin-top: 2vw;
+    }
     .soft_skills {
         font-size: 3.5vw !important;
+    }
+    .fa-linkedin {
+        font-size: 6vw;
+    }
+    .chevron_left i, .chevron_right i {
+        font-size: 4vw;
+    }
+    #navbarSupportedContent ul {
+        margin-top: 14vw !important;
     }
 }
 
@@ -109,8 +125,23 @@
     .language_skills_left {
         transform: translateX(-80px) translateY(-40px);
     } 
-
     .framework {
         transform: translateY(-80px);
+    }
+    #comments {
+        margin-top: 2vw !important;
+    }
+    .loading {
+        margin-top: 4vw;
+    }
+    .navbar-toggler{
+        right: auto !important;
+    }
+    #navbarSupportedContent ul {
+        margin-top: 10vw !important;
+    }
+    .navbar-toggler {
+        right: 0 !important; 
+        float: right !important;
     }
 }

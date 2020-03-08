@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: "Poppins";
-    src: url("../fonts/Poppins-regular.ttf") format("truetype");
+    src: url("../fonts/Poppins-Regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -21,11 +21,12 @@
     font-family: "Poppins-Light";
     src: url("../fonts/Poppins-Light.ttf") format("truetype");
 }
-
+html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 body {
     font-family: "Poppins" !important;
-    text-decoration: none;
-    overflow-x: hidden;
     font-size: 2em;
 }
 
@@ -93,6 +94,7 @@ ul {
     }
 }
 
+
 @keyframes line_height {
     from {
         height: 0;
@@ -101,8 +103,6 @@ ul {
         height: 50px;
     }
 }
-
-
 
 /************** NAVBAR **************/
 
@@ -162,17 +162,18 @@ ul {
 #presentation {
     margin-top: 90px;
     width:100%;
-    height: 100%;
     height: auto;
     background-color: black; /* url(https://www.tekoway.com/wp-content/uploads/2019/04/developper-votre-application-web-avec-des-frameworks@2x-80-1200x798.jpg);*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    min-height: 100%;
     padding: 0;
     display: flex; 
     align-items: center;
     justify-content: center;
+    max-width: 100%;
+    overflow-x: hidden;
+
 }
 
 #presentation_card {
@@ -390,6 +391,10 @@ ul {
     height: 40%;
 }
 
+.opacity {
+    animation: opacity 1s forwards; 
+}
+
 .image_largest {
     width: 100%; 
     height: auto;
@@ -525,6 +530,14 @@ form label {
     padding: 0.5vw;
 }
 
+/************** FOOTER **************/
 
+#rgpd_footer {
+    text-decoration: none;
+    color: silver;
+}
 
+#rgpd {
+    margin-top: 150px;
+}
 

@@ -6,10 +6,10 @@ class Slider {
         this.getLength();
         this.length = 0;
         this.view_thumbnails();
+        this.effect;
 
         $('#chevron_left').on('click', this.prev.bind(this));
         $('#projects').on("swipeleft", this.prev.bind(this));
-
         $('#chevron_right').on('click', this.next.bind(this));
         $('#projects').on('swiperight', this.next.bind(this));
 
@@ -45,7 +45,7 @@ class Slider {
     getInfos(i) {
         $.getJSON('http://floz-workshop.fr/projects.php', (data) => {
             let infos = data[i];
-            $('.image_project').html('<img class="img_project" src="/images/projects/' + infos.picture + '.png" alt="project">');
+            $('.image_project').html('<img class="opacity img_project" src="/images/projects/' + infos.picture + '.png" alt="project">');
             $('.thumbnail1_project').html('<img class="img-fluid" src="/images/projects/' + infos.thumbnail1 + '.png" alt="project">');
             $('.thumbnail2_project').html('<img class="img-fluid" src="/images/projects/' + infos.thumbnail2 + '.png" alt="project">');
             $('.thumbnail3_project').html('<img class="img-fluid" src="/images/projects/' + infos.thumbnail3 + '.png" alt="project">');

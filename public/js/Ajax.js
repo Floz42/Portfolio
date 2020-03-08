@@ -42,7 +42,7 @@ class Ajax {
     }
 
     ajax_cv(url) {
-        $('#cv_ajax').html('<div class="col-5 text-center loading alert alert-info p-2 align-items-center mx-auto">Chargement en cours...</div>');
+        $('#cv_ajax').html('<div class="col-md-5 col-xs-8 text-center loading alert alert-info p-2 align-items-center mx-auto">Chargement en cours...</div>');
         $.ajax({
             url : url,
             type : 'GET',

@@ -194,6 +194,14 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/rgpd", name="rgpd")
+     */
+    public function rgpd() 
+    {
+        return $this->render('main/RGPD.html.twig');
+    }
+
+    /**
      * @Route("/login", name="login", methods="POST|GET")
      */
     public function login(AuthenticationUtils $util)

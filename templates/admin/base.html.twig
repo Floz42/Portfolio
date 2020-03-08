@@ -31,18 +31,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_users') }}">Utilisateurs</a>
                     </li>
-                </div>
-                <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                  <ul class="navbar-nav ml-auto">
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ path('accueil') }}" title="Retour au site"><i class="back_site fas fa-undo"></i></i></a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ path('logout') }}" title="Se déconnecter"><i class="fas fa-sign-out-alt"></i></a>
-                      </li>
-                  </ul>
-              </div>
-              </nav>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('accueil') }}" title="Retour au site"><i class="back_site fas fa-undo mr-1"></i>Retour au site</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('logout') }}" title="Se déconnecter"><i class="fas fa-sign-out-alt mr-1"></i>Déconnexion</a>
+                    </li>
+                </div>           
+            </nav>
          </header>
         {% block body %}{% endblock %}
         {% block stylesheets %}{% endblock %}
