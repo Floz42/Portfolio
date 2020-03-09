@@ -19,94 +19,43 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <header>
-            <nav id="navbar" class="container-fluid navbar navbar-expand-lg navbar-dark bg-dark">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('admin_accueil') }}">
-                        <img id="logo1" src="{{ asset('/images/logo.png') }}"  alt="logo">
-                    </a>
-                {% else %}
-                    <a href="{{ path('accueil') }}">
-                        <img id="logo1" src="{{ asset('/images/logo.png') }}"  alt="logo">
-                    </a>
-                {% endif %}
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="{{ path('accueil') }}">ACCUEIL</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="scrollTo" href="#item-cv">MON CV</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="scrollTo" href="#item-skills">MES COMPÉTENCES</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="scrollTo" href="#item-portfolio">MON PORTFOLIO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="scrollTo" href="#item-contact">CONTACT</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        {% include 'main/header.html.twig' %}
+
         {% block errorpage %}{% endblock %}
         {% block body %}
-        <a href="http://floz-workshop.fr/CV_THIEBAUD_FLORIAN_2020.pdf" target="_blank" rel="noopener noreferrer">
-            <div id="download_cv">
-                CV
-                <i class="fas fa-download"></i>
-            </div>
-        </a>
-        <div id="presentation" class="container-fluid">
-            <div id="presentation_card">
-                <h1 class="animated bounceInDown title_presentation">
-                Florian Thiébaud
-                </h1>
-                <p class="animated bounceInUp text_presentation">
-                   Développeur Web Junior
-                </p>
-                <a class="scrollTo" href="#item-scroll4"><input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-3"></a>
-            </div>
-            <div id="presentation_card2">
-                <div class="profil">
-                    <img class="photo_profil" src="{{ asset('images/profil.jpeg')}}" alt="profil">
-                    <h2 class="title_presentation2"><span class="text-white">&lt</span> Bonjour <span class="text-white">&gt</span></h2>
-                </div> 
-                <p class="mt-2 animated bounceInUp text_presentation2">
-                   Fraîchement diplômé de la formation DWJ d'OpenClassRooms, j'ai une forte appétence pour les langages backend et notamment Symfony, tout en m'intéressant aux langages frontend.
-                </p>
-                <a class="scrollTo" href="#item-contact"><input type="button" value="Contact" class="btn_contact btn btn-outline-info btn-sm col-md-6 col-xs-3"></a>
-            </div>
-        </div>
+        
+        {% include 'main/download_cv.html.twig' %}
+
+        {% include 'main/presentation.html.twig' %}
+
         {% for message in app.flashes('success_confirm') %}
             <div class="alert alert-success col-8 m-auto text-center">{{ message }}</div>
         {% endfor %}
         {% for message in app.flashes('error_confirm') %}
             <div class="alert alert-danger col-8 m-auto text-center">{{ message }}</div>
         {% endfor %}
+
         {% include 'main/introduce_me.html.twig' %}
+
         <div id="item-cv"></div>
-        {% include 'main/cv.html.twig' %}
+            {% include 'main/cv.html.twig' %}
+
         <div id="item-skills"></div>
-        {% include 'main/skills.html.twig' %}
+            {% include 'main/skills.html.twig' %}
+
         <div id="item-portfolio"></div>
-        {% include 'main/projects_slider.html.twig' %}
+            {% include 'main/projects_slider.html.twig' %}
+
         <div id="item-contact"></div>
         <div class="row container m-auto" id="contact_comments">
             {% include 'main/contact.html.twig' %}
             {% include 'main/comments.html.twig' %}
         </div>
+        
         {% endblock %}
-        <footer class="footer mt-5 bg-dark p-2 text-center">
-            <div class="container">
-              <span class="text-muted">©2020 Florian THIEBAUD - <a id="rgpd_footer" href="{{ path('rgpd') }}" target="_blank">Politique de confidentialité</a><div><a id="linkedin" href="https://www.linkedin.com/in/florian-thiebaud-409a34103/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a></div></span>
-            </div>
-        </footer>
+
+        {% include 'main/footer.html.twig' %}
+
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
