@@ -1,3 +1,0 @@
-{% if error %}
-    <div class="alert alert-danger text-center">{{ error.messageKey| trans(error.messagedata, 'security') }}</div>
-{% endif %}

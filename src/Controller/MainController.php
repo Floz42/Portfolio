@@ -2,23 +2,23 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use App\Entity\Contact;
 use App\Entity\Comments;
-use App\Entity\Users;
 use App\Form\ContactType;
 use App\Form\InscriptionType;
+use App\Repository\CVInfosRepository;
 use App\Repository\CommentsRepository;
 use App\Repository\CVDiplomesRepository;
-use App\Repository\CVExperiencesRepository;
-use App\Repository\CVInfosRepository;
 use App\Repository\CVSoftSkillsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CVExperiencesRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as ObjectManager;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class MainController extends AbstractController
 {
@@ -209,7 +209,9 @@ class MainController extends AbstractController
         if ($util->getLastAuthenticationError()) {
             $this->addFlash('error_confirm', 'Erreur : mauvais pseudo et/ou mot de passe');
             return $this->redirectToRoute('accueil');
-        } 
+        } else {
+            $this->addFlash('success_confirm', "Vous êtes bien connecté et pouvez laisser un commentaire.");
+        }
         return $this->render('main/submit.html.twig', [
             "lastUsername" => $util->getLastUsername(),
             "error" => $util->getLastAuthenticationError()
@@ -221,7 +223,9 @@ class MainController extends AbstractController
     */
     public function logout() 
     {
-        return $this->redirectToRoute('accueil');
+        return $this->redirectToRoute('accueil',[
+            "deconnexion" => true
+        ]);
     }
 
 }
