@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
@@ -23,14 +25,19 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5, minMessage="Ce pseudonyme est trop court (minimum 5 caractères)")
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=6, minMessage="Ce mot de passe est trop court (minimum 6 caractères)")
      */
     private $password;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Les deux mots de passe ne sont pas identiques")
+     */
     private $verifPassword;
 
     /**

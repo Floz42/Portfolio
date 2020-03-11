@@ -122,7 +122,7 @@ class MainController extends AbstractController
     /**
      * @Route("/diplomes_ajax", name="diplomes_ajax")
      */
-    public function cv_diplomes(CVDiplomesRepository $repository)
+    public function diplomes_ajax(CVDiplomesRepository $repository)
     {
         $diplomes = $repository->findAll();
 
