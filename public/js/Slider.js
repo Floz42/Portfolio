@@ -1,4 +1,4 @@
-class Slider {
+export default class Slider {
 
     constructor() {
         this.index = 0;
@@ -7,15 +7,10 @@ class Slider {
         this.length = 0;
         this.view_thumbnails();
         this.effect;
-
-        $('#chevron_left').on('click', this.prev.bind(this));
-        $('#projects').on("swipeleft", this.prev.bind(this));
-        $('#chevron_right').on('click', this.next.bind(this));
-        $('#projects').on('swiperight', this.next.bind(this));
-
-        $(document).on('keydown', this.arrows.bind(this));
     }
 
+    /** @description switch to next project or return to the first
+    */
     next() {
         if (this.index < this.length -1) {
             this.index++;
@@ -25,6 +20,8 @@ class Slider {
         this.getInfos(this.index);
     };
 
+    /** @description switch to previous project or return to the last
+    */
     prev() {
         if (this.index > 0) {
             this.index--;
@@ -33,7 +30,9 @@ class Slider {
         }
         this.getInfos(this.index);
     };
-    
+
+    /** @description get the total project number
+    */
     getLength() {
         $.getJSON('http://floz-workshop.fr/projects.php', (data) => {
             $.each(data, (i) => {
@@ -42,6 +41,8 @@ class Slider {
         });
     }
 
+    /** @description collect informations to the API
+    */
     getInfos(i) {
         $.getJSON('http://floz-workshop.fr/projects.php', (data) => {
             let infos = data[i];
@@ -61,6 +62,8 @@ class Slider {
         });
     }
 
+    /** @description switch project with keyboard arrows
+    */
     arrows(e) {
         switch(e.keyCode) {
             case 37: 
@@ -72,23 +75,20 @@ class Slider {
         }
     }
 
+    /** @description show or hide thumbnails project
+    */
     view_thumbnails() {
-            $('.thumbnails .thumb').on('click', function() {
-                let attribut = $(this).find('img').attr('src');
-                $('#large_image').css('display', 'inherit');
-                $('#large_picture').html('<img src="' + attribut + '">');
-                $('.informations_project').css('display', 'none');
-                $('html, body').animate({scrollTop:$(".thumbnails").offset().top - 130}, 1000);
-            })
-            $('#close_image').on('click', function() {
-                $('#large_image').css('display', 'none');
-                $('.informations_project').css('display', 'inherit');
-            })
-            $('#large_image').on('click', function() {
-                $(this).css('display', 'none');
-                $('.informations_project').css('display', 'inherit');
-            });
+        $('.thumbnails .thumb').on('click', function() {
+            let attribut = $(this).find('img').attr('src');
+            $('#large_image').css('display', 'inherit');
+            $('#large_picture').html('<img src="' + attribut + '">');
+            $('.informations_project').css('display', 'none');
+            $('html, body').animate({scrollTop:$(".thumbnails").offset().top - 130}, 1000);
+        })
+        $('#close_image, #large_image').on('click', function() {
+            $('#large_image').css('display', 'none');
+            $('.informations_project').css('display', 'inherit');
+        })
     }
 }
 
-const slider = new Slider;

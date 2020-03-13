@@ -12,6 +12,8 @@ class UsersController extends AbstractController
 {
 
     /**
+     * Index of administration users
+     * 
      * @Route("/admin/admin_users", name="admin_users")
      */
     public function adminUsers(UsersRepository $repository)
@@ -24,18 +26,20 @@ class UsersController extends AbstractController
     }
 
     /**
+     * Delete one user
+     * 
      * @Route("/admin/delete_user/{id}", name="delete_user", methods="POST|GET")
      */
-    public function deleteComment(Users $user, ObjectManager $manager): Response
+    public function deleteUser(Users $user, ObjectManager $manager)
     {
         $manager->remove($user);
         $manager->flush();
-        return $this->json([
-            'id' => $user->getId(),
-        ],200); 
+        return $this->render('admin/admin_accueil.html.twig');
     }
 
     /**
+     * Update role to an user (ROLE_ADMIN or ROLE_USER)
+     * 
      * @Route("/admin/update_user/{id}", name="update_user", methods="POST|GET")
      */
     public function updateRole(Users $user, ObjectManager $manager): Response

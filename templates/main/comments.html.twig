@@ -28,7 +28,7 @@
         {% for comment in comments %}
         <div class="row">
             <div class="row col-12">
-                 Posté le {{ comment.date_comment|date('d/m/Y') }} par : {{ comment.users.username }}
+                 Posté le {{ comment.date_comment|date('d/m/Y') }} par  <span style="color:blue" class="ml-1"> {{ comment.users.username }} </span>
             </div>
             <div class="row col-12">
                 {{ comment.comment }}

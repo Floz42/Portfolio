@@ -163,10 +163,11 @@ ul {
     margin-top: 90px;
     width:100%;
     height: auto;
-    background-color: black; /* url(https://www.tekoway.com/wp-content/uploads/2019/04/developper-votre-application-web-avec-des-frameworks@2x-80-1200x798.jpg);*/
+    background-image: url("../images/background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    background-position: center;
     padding: 0;
     display: flex; 
     align-items: center;
@@ -185,6 +186,7 @@ ul {
     border-radius: 25px;
     padding: 3vw;
     margin: 10vw;
+    background-color: rgb(0,0,0,0.8);
 }
 
 #presentation_card2 {
@@ -198,6 +200,7 @@ ul {
     border-radius: 25px;
     padding: 3vw;
     opacity: 0;
+    background-color: rgb(0,0,0,0.8);
 }
 
 
@@ -330,7 +333,7 @@ ul {
     height: 80px;
     border-radius: 25%;
     padding: 1vw;
-    animation: opacity 5s forwards;
+    animation: opacity 3s forwards;
 }
 
 .framework {

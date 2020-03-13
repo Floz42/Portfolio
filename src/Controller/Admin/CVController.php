@@ -24,6 +24,8 @@ class CVController extends AbstractController
 {
 
     /**
+     * Index of cv administration
+     * 
      * @Route("/admin/admin_cv", name="admin_cv")
      */
     public function admin_cv_index()
@@ -31,7 +33,9 @@ class CVController extends AbstractController
         return $this->render('admin/cv/admin_cv.html.twig');
     }
 
-        /**
+    /**
+     * Show diplomes in ajax
+     * 
      * @Route("/admin/admin_diplomes_ajax", name="admin_diplomes_ajax")
      */
     public function cv_diplomes(CVDiplomesRepository $repository)
@@ -44,6 +48,8 @@ class CVController extends AbstractController
     }
 
     /**
+     * Show xp in ajax
+     * 
      * @Route("/admin/admin_experiences_ajax", name="admin_experiences_ajax")
      */
     public function experiences_ajax(CVExperiencesRepository $repository)
@@ -57,6 +63,8 @@ class CVController extends AbstractController
     }
 
     /**
+     * Show infos in ajax
+     * 
      * @Route("/admin/admin_infos_ajax", name="admin_infos_ajax")
      */
     public function infos_ajax(CVInfosRepository $repository) 
@@ -70,6 +78,8 @@ class CVController extends AbstractController
 
 
     /**
+     * show soft skills in ajax
+     * 
      * @Route("/admin/admin_softskills_ajax", name="admin_softskills_ajax")
      */
     public function softskills_ajax(CVSoftSkillsRepository $repository)
@@ -84,6 +94,8 @@ class CVController extends AbstractController
     }
     
      /**
+     * The same method to add or edit a xp
+     *  
      * @Route("/admin/add_xp", name="add_xp", methods="GET|POST")
      * @Route("/admin/xp/{id}", name="update_xp", methods="POST|GET")
      */
@@ -114,6 +126,8 @@ class CVController extends AbstractController
     }
 
     /**
+     * Delete a xp 
+     * 
      * @Route("/admin/delete_xp/{id}", name="delete_xp", methods="POST|GET")
      */
     public function delete_xp(CVExperiences $xp, ObjectManager $manager): Response
@@ -125,6 +139,8 @@ class CVController extends AbstractController
     }
 
      /**
+     * The same method to add or edit a diplome 
+     * 
      * @Route("/admin/add_diplome", name="add_diplome", methods="GET|POST")
      * @Route("/admin/diplome/{id}", name="update_diplome", methods="POST|GET")
      */
@@ -166,6 +182,8 @@ class CVController extends AbstractController
     }
 
     /**
+     * The same method to add or edit a soft skill
+     * 
      * @Route("/admin/add_sskill", name="add_sskill", methods="GET|POST")
      * @Route("/admin/sskill/{id}", name="update_sskill", methods="POST|GET")
      */
@@ -207,6 +225,8 @@ class CVController extends AbstractController
     }
 
     /**
+     * Edit informations (avatar and other)
+     * 
      * @Route("/admin/infos/{id}", name="update_infos", methods="POST|GET")
      */
     public function update_infos(CVInfos $infos , Request $request, ObjectManager $manager)
@@ -227,5 +247,4 @@ class CVController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 }

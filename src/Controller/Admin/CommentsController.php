@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CommentsController extends AbstractController
 {
     /**
+     * Index of backend 
+     * 
      * @Route("/admin", name="admin_accueil")
      */
     public function index() 
@@ -19,6 +21,8 @@ class CommentsController extends AbstractController
     }
 
     /**
+     * Show all comments to website
+     * 
      * @Route("/admin/admin_comments", name="admin_comments")
      */
     public function adminComments(CommentsRepository $repository)
@@ -31,17 +35,15 @@ class CommentsController extends AbstractController
     }
 
     /**
+     * Delete one comment 
+     * 
      * @Route("/admin/delete_comment/{id}", name="delete_comment", methods="POST|GET")
      */
-    public function deleteComment(Comments $comment, ObjectManager $manager): Response
+    public function deleteComment(Comments $comment, ObjectManager $manager)
     {
-
-            $manager->remove($comment);
-            $manager->flush();
-            return $this->json([
-                'id' => $comment->getId(),
-            ],200); 
-    
+        $manager->remove($comment);
+        $manager->flush();
+        return $this->render('admin/admin_accueil.html.twig');
     }
 
   

@@ -24,6 +24,8 @@ class MainController extends AbstractController
 {
 
     /**
+     * Index of portfolio, instanciation of form contact
+     * 
      * @Route("/", name="accueil", methods="POST|GET")
      */
     public function index(Request $request, \Swift_Mailer $mailer, CommentsRepository $repository, PaginatorInterface $paginator)
@@ -65,6 +67,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * Post comment in ajax and php et show it directely
+     * 
      * @Route("/post_comment", name="post_comment", methods="POST|GET")
      */
     public function post_comment(Request $request, ObjectManager $manager, CommentsRepository $repository, PaginatorInterface $paginator)
@@ -88,6 +92,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * Resfresh comments zone after post one in ajax
+     * 
      * @Route("/show_comments", name="show_comments")
      */
     public function show_comments(PaginatorInterface $paginator, Request $request, CommentsRepository $repository)
@@ -103,23 +109,8 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/change_page_comments", name="change_page_comments", methods="GET|POST")
-     */
-    public function change_page_comments(CommentsRepository $repository, PaginatorInterface $paginator, Request $request)
-    {
-        $i = $_POST['page'];
-        $comments = $paginator->paginate(
-            $repository->paginationComments(),
-            $request->query->getInt('page', $i),
-            3
-        );
-        $i = '';
-        return $this->render('main/post_comments.html.twig', [
-            'comments' => $comments 
-        ]);   
-    }
-
-    /**
+     * Show cv diplomes in ajax
+     * 
      * @Route("/diplomes_ajax", name="diplomes_ajax")
      */
     public function diplomes_ajax(CVDiplomesRepository $repository)
@@ -132,6 +123,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * Show cv experiences in ajax
+     * 
      * @Route("/experiences_ajax", name="experiences_ajax")
      */
     public function experiences_ajax(CVExperiencesRepository $repository)
@@ -144,6 +137,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * Show sc soft skills in ajax
+     * 
      * @Route("/softskills_ajax", name="softskills_ajax")
      */
     public function softskills_ajax(CVSoftSkillsRepository $repository)
@@ -156,6 +151,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * Show cv infos in ajax
+     * 
      * @Route("/infos_ajax", name="infos_ajax")
      */
      public function infos_ajax(CVInfosRepository $repository) 
@@ -168,6 +165,8 @@ class MainController extends AbstractController
      }
 
     /**
+     * Form subscribe 
+     * 
      * @Route("/subscribe_ajax", name="subscribe_ajax", methods="POST|GET")
      */
     public function show_subscribe_ajax(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) 
@@ -194,6 +193,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * RGPD page 
+     * 
      * @Route("/rgpd", name="rgpd")
      */
     public function rgpd() 
@@ -202,6 +203,8 @@ class MainController extends AbstractController
     }
 
     /**
+     * Form login
+     * 
      * @Route("/login", name="login", methods="POST|GET")
      */
     public function login(AuthenticationUtils $util)
