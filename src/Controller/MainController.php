@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Users;
 use App\Entity\Contact;
 use App\Entity\Comments;
+use App\Entity\User;
 use App\Form\ContactType;
 use App\Form\InscriptionType;
 use App\Repository\CVInfosRepository;
@@ -213,7 +214,7 @@ class MainController extends AbstractController
             $this->addFlash('error_confirm', 'Erreur : mauvais pseudo et/ou mot de passe');
             return $this->redirectToRoute('accueil');
         } else {
-            $this->addFlash('success_confirm', "Vous êtes bien connecté et pouvez laisser un commentaire.");
+            $this->addFlash('success_confirm', "Vous êtes désormais connecté !");
         }
         return $this->render('main/submit.html.twig', [
             "lastUsername" => $util->getLastUsername(),
@@ -226,9 +227,16 @@ class MainController extends AbstractController
     */
     public function logout() 
     {
-        return $this->redirectToRoute('accueil',[
-            "deconnexion" => true
-        ]);
+
+    }
+
+    /**
+    * @Route("/logout_message", name="logout_message")
+    */
+    public function logout_message() 
+    {
+        $this->addFlash('success_confirm', 'Vous êtes bien déconnecté.');
+        return $this->redirectToRoute('accueil');
     }
 
 }

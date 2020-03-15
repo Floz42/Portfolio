@@ -53,6 +53,15 @@
     #navbarSupportedContent ul {
         margin-top: 14vw !important;
     }
+    .navigation nav ul {
+        display: flex;
+        overflow-x: hidden;
+    }
+    #presentation {
+        background-attachment: initial;
+        background-size: cover;
+    }
+
 }
 
 @media all and (min-width: 426px) and (max-width: 768px) {
@@ -140,8 +149,5 @@
     #navbarSupportedContent ul {
         margin-top: 10vw !important;
     }
-    .navbar-toggler {
-        right: 0 !important; 
-        float: right !important;
-    }
+
 }

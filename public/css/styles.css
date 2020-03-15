@@ -174,7 +174,6 @@ ul {
     justify-content: center;
     max-width: 100%;
     overflow-x: hidden;
-
 }
 
 #presentation_card {
@@ -476,11 +475,6 @@ form label {
 
 #subscribe, #submit {
     animation: opacity 2s forwards;
-}
-
-.navigation nav ul {
-    display: flex; 
-    justify-content: center;
 }
 
 /************** ADMIN ACCUEIL **************/
