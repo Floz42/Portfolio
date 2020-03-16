@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Users;
 use App\Repository\UsersRepository;
+use App\Service\PaginationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as ObjectManager;
@@ -14,14 +15,16 @@ class UsersController extends AbstractController
     /**
      * Index of administration users
      * 
-     * @Route("/admin/admin_users", name="admin_users")
+     * @Route("/admin/admin_users/{page}", name="admin_users")
      */
-    public function adminUsers(UsersRepository $repository)
+    public function adminUsers(PaginationService $pagination, $page = 1)
     {
-        $users = $repository->findAllInverse();
+        $pagination->setEntityClass(Users::class)
+                   ->setCurrentPage($page)
+                   ->setLimit(5);
 
         return $this->render('admin/users/admin_users.html.twig', [
-            'users' => $users
+            'pagination' => $pagination
         ]);
     }
 

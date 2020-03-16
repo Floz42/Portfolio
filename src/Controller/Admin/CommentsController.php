@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Comments;
 use App\Repository\CommentsRepository;
+use App\Service\PaginationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as ObjectManager;
@@ -23,14 +24,15 @@ class CommentsController extends AbstractController
     /**
      * Show all comments to website
      * 
-     * @Route("/admin/admin_comments", name="admin_comments")
+     * @Route("/admin/admin_comments/{page}", name="admin_comments")
      */
-    public function adminComments(CommentsRepository $repository)
+    public function adminComments(PaginationService $pagination, $page = 1)
     {
-        $comments = $repository->findAllInverse();
+        $pagination->setEntityClass(Comments::class)
+                   ->setCurrentPage($page);
 
         return $this->render('admin/comments/admin_comments.html.twig', [
-            'comments' => $comments
+            'pagination' => $pagination
         ]);
     }
 

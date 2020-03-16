@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for comment in comments %}
+                    {% for comment in pagination.data %}
                         <tr class="comment_id{{ comment.id }}">
                             <th>{{ comment.users.username }}</th>
                             <th>{{ comment.comment }}</th>
@@ -33,5 +33,6 @@
             </table>
         </div>
     </div>
+    {{ pagination.display() }}
 </div>
 {% endblock %}
