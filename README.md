@@ -1,3 +1,6 @@
+## Projet personnel - Fin de formation OpenClassrooms
+Pour ce projet j'ai choisit de créer mon portfolio et pour se faire d'apprendre à développer sous Symfony afin de maîtriser les bases de ce framework. 
+
 # Instructions
 Pour ce projet, vous développerez l'application de votre choix en utilisant les 5 langages que vous avez appris : HTML, CSS, JS, PHP et SQL. L'approche visuelle et le thème sont entièrement libres.
 
