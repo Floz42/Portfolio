@@ -1,7 +1,4 @@
 <div id="submit" class="mt-2 mx-auto col-8">
-    {% if error %}
-        <div class="alert alert-danger">Le pseudo et/ou le mot de passe ne sont pas bons.</div>
-    {% endif %}
     <form action="{{ path('login') }}" method="post"> 
         <div class="form-group">
             <label for="username" class="required">Pseudo :</label>

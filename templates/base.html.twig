@@ -34,6 +34,15 @@
         {% for message in app.flashes('error_confirm') %}
             <div class="alert alert-danger col-8 m-auto text-center">{{ message }}</div>
         {% endfor %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="alert alert-info col-8 m-auto text-center">
+                Vous êtes connecté en tant que {{ app.user.username }}
+                <a href="{{ path('logout')}}" class="ml-2" style="text-decoration:none;">
+                    <i class="fas fa-sign-out-alt" title="Se déconnecter"></i>
+                    Se déconnecter
+                </a>
+            </div>
+        {% endif %}
 
         {% include 'main/introduce_me.html.twig' %}
 

@@ -55,6 +55,14 @@ class CVInfos
      */
     private $age;
 
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updated_at;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -131,13 +139,6 @@ class CVInfos
 
         return $this;
     }
-
-    /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTimeInterface|null
-     */
-    private $updated_at;
 
     /**
      *

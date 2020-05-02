@@ -25,6 +25,7 @@ class Comments
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide")
      */
     private $comment;
 

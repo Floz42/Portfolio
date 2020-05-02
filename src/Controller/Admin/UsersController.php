@@ -2,22 +2,27 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
-use App\Repository\UsersRepository;
 use App\Service\PaginationService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface as ObjectManager;
+use App\Controller\Admin\AdminController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class UsersController extends AbstractController
+/**
+ * Manager the users 
+ */
+class UsersController extends AdminController
 {
-
     /**
      * Index of administration users
      * 
      * @Route("/admin/admin_users/{page}", name="admin_users")
+     * 
+     * @param PaginationService $pagination
+     * @param $page
+     * 
+     * @return Response
      */
-    public function adminUsers(PaginationService $pagination, $page = 1)
+    public function adminUsers(PaginationService $pagination, $page = 1): Response
     {
         $pagination->setEntityClass(Users::class)
                    ->setCurrentPage($page)
@@ -32,11 +37,15 @@ class UsersController extends AbstractController
      * Delete one user
      * 
      * @Route("/admin/delete_user/{id}", name="delete_user", methods="POST|GET")
+     * 
+     * @param Users $user
+     * 
+     * @return Response
      */
-    public function deleteUser(Users $user, ObjectManager $manager)
+    public function deleteUser(Users $user): Response
     {
-        $manager->remove($user);
-        $manager->flush();
+        $this->manager->remove($user);
+        $this->manager->flush();
         return $this->render('admin/admin_accueil.html.twig');
     }
 
@@ -44,20 +53,22 @@ class UsersController extends AbstractController
      * Update role to an user (ROLE_ADMIN or ROLE_USER)
      * 
      * @Route("/admin/update_user/{id}", name="update_user", methods="POST|GET")
+     * 
+     * @param Users $user
+     * 
+     * @return Response
      */
-    public function updateRole(Users $user, ObjectManager $manager): Response
+    public function updateRole(Users $user): Response
     {
         $role = $user->getRoles();
         $new_role = ($role[0] === 'ROLE_USER') ? 'ROLE_ADMIN' : 'ROLE_USER';
 
         $user->setRoles($new_role);
-        $manager->flush();
+        $this->manager->flush();
         
         return $this->json([
             'role' => $user->getRoles()
         ], 200);
     }
-
-  
 }
 

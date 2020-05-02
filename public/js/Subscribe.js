@@ -30,3 +30,5 @@ class Subscribe {
         return isValid;
     }
 }
+
+const subscribe = new Subscribe();

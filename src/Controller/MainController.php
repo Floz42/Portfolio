@@ -16,8 +16,9 @@ use App\Repository\CVExperiencesRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface as ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -25,16 +26,34 @@ class MainController extends AbstractController
 {
 
     /**
+     * @var EntityManagerInterface
+     */
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager)            
+    {
+        $this->manager = $manager;
+    }
+
+    /**
      * Index of portfolio, instanciation of form contact
      * 
      * @Route("/", name="accueil", methods="POST|GET")
+     * 
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @param CommentRepository $repository
+     * @param PaginatorIterface $paginator
+     * 
+     * @return Response
      */
-    public function index(Request $request, \Swift_Mailer $mailer, CommentsRepository $repository, PaginatorInterface $paginator)
+    public function index(Request $request, \Swift_Mailer $mailer, CommentsRepository $repository, PaginatorInterface $paginator): Response
     {
         $contact = new Contact();
         $form_contact = $this->createForm(ContactType::class, $contact);
 
         $form_contact->handleRequest($request);
+
         if ($form_contact->isSubmitted() && $form_contact->isValid()) {
             $data = $form_contact->getData();
             $message = (new \Swift_Message())
@@ -68,19 +87,25 @@ class MainController extends AbstractController
     }
 
     /**
-     * Post comment in ajax and php et show it directely
+     * Post comment in ajax and show it directely
      * 
      * @Route("/post_comment", name="post_comment", methods="POST|GET")
+     * 
+     * @param Request $request
+     * @param CommentRepository $repository
+     * @param PaginatorInterface $paginator
+     * 
+     * @return Response
      */
-    public function post_comment(Request $request, ObjectManager $manager, CommentsRepository $repository, PaginatorInterface $paginator)
+    public function post_comment(Request $request, CommentsRepository $repository, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         $comment = new Comments();
-            $comment->setComment($_POST['message']);
+            $comment->setComment($request->get('message'));
             $comment->setDate_comment(new \DateTime());
             $comment->setUsers($user);
-            $manager->persist($comment);
-            $manager->flush();
+            $this->manager->persist($comment);
+            $this->manager->flush();
 
             $comments = $paginator->paginate(
                 $repository->paginationComments(),
@@ -96,8 +121,14 @@ class MainController extends AbstractController
      * Resfresh comments zone after post one in ajax
      * 
      * @Route("/show_comments", name="show_comments")
+     * 
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @param CommentRepository $repository
+     * 
+     * @return Response
      */
-    public function show_comments(PaginatorInterface $paginator, Request $request, CommentsRepository $repository)
+    public function show_comments(PaginatorInterface $paginator, Request $request, CommentsRepository $repository): Response
     {
         $comments = $paginator->paginate(
             $repository->paginationComments(),
@@ -113,8 +144,12 @@ class MainController extends AbstractController
      * Show cv diplomes in ajax
      * 
      * @Route("/diplomes_ajax", name="diplomes_ajax")
+     * 
+     * @param CVDiplomesRepository $repository
+     * 
+     * @return Response
      */
-    public function diplomes_ajax(CVDiplomesRepository $repository)
+    public function diplomes_ajax(CVDiplomesRepository $repository): Response
     {
         $diplomes = $repository->findAll();
 
@@ -127,10 +162,14 @@ class MainController extends AbstractController
      * Show cv experiences in ajax
      * 
      * @Route("/experiences_ajax", name="experiences_ajax")
+     * 
+     * @param CVExperiencesRepository $repository
+     * 
+     * @return Response
      */
-    public function experiences_ajax(CVExperiencesRepository $repository)
+    public function experiences_ajax(CVExperiencesRepository $repository): Response
     {
-        $xp = $repository->findAll();
+        $xp = $repository->findBy([], ['id' => "DESC"]);
 
         return $this->render('main/cv/experiences_ajax.html.twig', [
             'xps' => $xp
@@ -141,8 +180,11 @@ class MainController extends AbstractController
      * Show sc soft skills in ajax
      * 
      * @Route("/softskills_ajax", name="softskills_ajax")
+     *       
+     * @param CVSoftSkillRepository $repository
+     * @return Response
      */
-    public function softskills_ajax(CVSoftSkillsRepository $repository)
+    public function softskills_ajax(CVSoftSkillsRepository $repository): Response
     {
         $softskills = $repository->findAll();
 
@@ -155,10 +197,14 @@ class MainController extends AbstractController
      * Show cv infos in ajax
      * 
      * @Route("/infos_ajax", name="infos_ajax")
+     * 
+     * @param CVInfosRepository $repository
+     * 
+     * @return Response
      */
-     public function infos_ajax(CVInfosRepository $repository) 
+     public function infos_ajax(CVInfosRepository $repository): Response 
      {
-        $infos = $repository->find(4);
+        $infos = $repository->findOneBy(["name" => "THIEBAUD"]);
 
         return $this->render('main/cv/infos_ajax.html.twig', [
             'infos' => $infos
@@ -169,8 +215,13 @@ class MainController extends AbstractController
      * Form subscribe 
      * 
      * @Route("/subscribe_ajax", name="subscribe_ajax", methods="POST|GET")
+     * 
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * 
+     * @return Response
      */
-    public function show_subscribe_ajax(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) 
+    public function show_subscribe_ajax(Request $request, UserPasswordEncoderInterface $encoder): Response 
     {
         $subscribe = new Users();
         $form_subscribe = $this->createForm(InscriptionType::class, $subscribe);
@@ -179,8 +230,8 @@ class MainController extends AbstractController
             $passwordCrypt = $encoder->encodePassword($subscribe, $subscribe->getPassword());
             $subscribe->setPassword($passwordCrypt);
             $subscribe->setRoles('ROLE_USER');
-            $manager->persist($subscribe);
-            $manager->flush();
+            $this->manager->persist($subscribe);
+            $this->manager->flush();
             $this->addFlash('success_confirm', 'Votre inscription est bien prise en compte, vous pouvez maintenant vous connecter.');
             return $this->redirectToRoute('accueil');
         } elseif ($form_subscribe->isSubmitted() && !$form_subscribe->isValid()) {
@@ -197,8 +248,10 @@ class MainController extends AbstractController
      * RGPD page 
      * 
      * @Route("/rgpd", name="rgpd")
+     * 
+     * @return Response
      */
-    public function rgpd() 
+    public function rgpd(): Response 
     {
         return $this->render('main/RGPD.html.twig');
     }
@@ -207,23 +260,26 @@ class MainController extends AbstractController
      * Form login
      * 
      * @Route("/login", name="login", methods="POST|GET")
+     * 
+     * @param AuthenticationUtils $utils
+     * 
+     * @return Response
      */
-    public function login(AuthenticationUtils $util)
+    public function login(AuthenticationUtils $util): Response
     {
         if ($util->getLastAuthenticationError()) {
             $this->addFlash('error_confirm', 'Erreur : mauvais pseudo et/ou mot de passe');
             return $this->redirectToRoute('accueil');
-        } else {
-            $this->addFlash('success_confirm', "Vous êtes désormais connecté !");
-        }
-        return $this->render('main/submit.html.twig', [
-            "lastUsername" => $util->getLastUsername(),
-            "error" => $util->getLastAuthenticationError()
-        ]);
+        } 
+        return $this->render('main/submit.html.twig');
     }
 
     /**
+    * Mathod in link with security.yaml to logout user
+    * 
     * @Route("/logout", name="logout")
+    *
+    * @return void
     */
     public function logout() 
     {
@@ -231,9 +287,13 @@ class MainController extends AbstractController
     }
 
     /**
+    * Send logout message to the user
+    * 
     * @Route("/logout_message", name="logout_message")
+    *
+    * @return Response
     */
-    public function logout_message() 
+    public function logout_message(): Response 
     {
         $this->addFlash('success_confirm', 'Vous êtes bien déconnecté.');
         return $this->redirectToRoute('accueil');

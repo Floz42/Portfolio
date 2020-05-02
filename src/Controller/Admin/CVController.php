@@ -1,34 +1,37 @@
 <?php
 namespace App\Controller\Admin;
 
-use App\Entity\CVDiplomes;
-use App\Entity\CVExperiences;
 use App\Entity\CVInfos;
+use App\Form\CvInfosType;
+use App\Entity\CVDiplomes;
+use App\Form\CvSskillsType;
 use App\Entity\CVSoftSkills;
 use App\Form\CvDiplomesType;
+use App\Entity\CVExperiences;
 use App\Form\CvExperiencesType;
-use App\Form\CvInfosType;
-use App\Form\CvSskillsType;
-use App\Repository\CVDiplomesRepository;
 use App\Repository\CVInfosRepository;
+use App\Repository\CVDiplomesRepository;
+use App\Controller\Admin\AdminController;
 use App\Repository\CVSoftSkillsRepository;
 use App\Repository\CVExperiencesRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface as ObjectManager;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-
-class CVController extends AbstractController
+/**
+ * Manager all the sections CV
+ */
+class CVController extends AdminController
 {
 
     /**
      * Index of cv administration
      * 
      * @Route("/admin/admin_cv", name="admin_cv")
+     * 
+     * @return Response
      */
-    public function admin_cv_index()
+    public function admin_cv_index(): Response
     {
         return $this->render('admin/cv/admin_cv.html.twig');
     }
@@ -37,8 +40,12 @@ class CVController extends AbstractController
      * Show diplomes in ajax
      * 
      * @Route("/admin/admin_diplomes_ajax", name="admin_diplomes_ajax")
+     * 
+     * @param CVDiplomesRepository $repository
+     * 
+     * @return Response
      */
-    public function cv_diplomes(CVDiplomesRepository $repository)
+    public function cv_diplomes(CVDiplomesRepository $repository): Response
     {
         $diplomes = $repository->findAll();
 
@@ -51,8 +58,12 @@ class CVController extends AbstractController
      * Show xp in ajax
      * 
      * @Route("/admin/admin_experiences_ajax", name="admin_experiences_ajax")
+     * 
+     * @param CVExperiencesRepository $repository
+     * 
+     * @return Response
      */
-    public function experiences_ajax(CVExperiencesRepository $repository)
+    public function experiences_ajax(CVExperiencesRepository $repository): Response
     {
    
         $xp = $repository->findAll();
@@ -66,8 +77,12 @@ class CVController extends AbstractController
      * Show infos in ajax
      * 
      * @Route("/admin/admin_infos_ajax", name="admin_infos_ajax")
+     * 
+     * @param CVInfosRepository $repository
+     * 
+     * @return Response
      */
-    public function infos_ajax(CVInfosRepository $repository) 
+    public function infos_ajax(CVInfosRepository $repository): Response 
     {
        $infos = $repository->find(4);
 
@@ -81,8 +96,12 @@ class CVController extends AbstractController
      * show soft skills in ajax
      * 
      * @Route("/admin/admin_softskills_ajax", name="admin_softskills_ajax")
+     * 
+     * @param CVSoftSkillsRepository $repository
+     * 
+     * @return Response
      */
-    public function softskills_ajax(CVSoftSkillsRepository $repository)
+    public function softskills_ajax(CVSoftSkillsRepository $repository): Response
     {
         $softskills = $repository->findAll();
 
@@ -98,8 +117,13 @@ class CVController extends AbstractController
      *  
      * @Route("/admin/add_xp", name="add_xp", methods="GET|POST")
      * @Route("/admin/xp/{id}", name="update_xp", methods="POST|GET")
+     * 
+     * @param CVExperiences $experiences
+     * @param Request $request
+     * 
+     * @return Response
      */
-    public function add_xp(CVExperiences $experience = null, Request $request, ObjectManager $manager)
+    public function add_xp(CVExperiences $experience = null, Request $request): Response
     {
         $exist = true;
         $message = "Votre expérience a bien été modifiée.";
@@ -113,8 +137,8 @@ class CVController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($experience);
-            $manager->flush();
+            $this->manager->persist($experience);
+            $this->manager->flush();
             $this->addFlash('success', $message);
             return $this->redirectToRoute('admin_cv');
         } 
@@ -129,11 +153,15 @@ class CVController extends AbstractController
      * Delete a xp 
      * 
      * @Route("/admin/delete_xp/{id}", name="delete_xp", methods="POST|GET")
+     * 
+     * @param CVExperiences $xp
+     * 
+     * @return Response
      */
-    public function delete_xp(CVExperiences $xp, ObjectManager $manager): Response
+    public function delete_xp(CVExperiences $xp): Response
     {
-        $manager->remove($xp);
-        $manager->flush();
+        $this->manager->remove($xp);
+        $this->manager->flush();
         $this->addFlash('success', "L'expérience a bien été supprimée.");
         return $this->redirectToRoute('admin_cv');
     }
@@ -143,8 +171,13 @@ class CVController extends AbstractController
      * 
      * @Route("/admin/add_diplome", name="add_diplome", methods="GET|POST")
      * @Route("/admin/diplome/{id}", name="update_diplome", methods="POST|GET")
+     * 
+     * @param CVDiplomes $diplome
+     * @param Request $request
+     * 
+     * @return Response
      */
-    public function add_diplome(CVDiplomes $diplome = null, Request $request, ObjectManager $manager)
+    public function add_diplome(CVDiplomes $diplome = null, Request $request): Response
     {
         $exist = true;
         $message = "Votre diplôme a bien été modifiée.";
@@ -158,8 +191,8 @@ class CVController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($diplome);
-            $manager->flush();
+            $this->manager->persist($diplome);
+            $this->manager->flush();
             $this->addFlash('success', $message);
             return $this->redirectToRoute('admin_cv');
         } 
@@ -172,11 +205,15 @@ class CVController extends AbstractController
 
     /**
      * @Route("/admin/delete_diplome/{id}", name="delete_diplome", methods="POST|GET")
+     * 
+     * @param CVDiplomes $diplome
+     * 
+     * @return Response
      */
-    public function delete_diplome(CVDiplomes $diplome, ObjectManager $manager): Response
+    public function delete_diplome(CVDiplomes $diplome): Response
     {
-        $manager->remove($diplome);
-        $manager->flush();
+        $this->manager->remove($diplome);
+        $this->manager->flush();
         $this->addFlash('success', "Le diplôme a bien été supprimé.");
         return $this->redirectToRoute('admin_cv');
     }
@@ -186,8 +223,13 @@ class CVController extends AbstractController
      * 
      * @Route("/admin/add_sskill", name="add_sskill", methods="GET|POST")
      * @Route("/admin/sskill/{id}", name="update_sskill", methods="POST|GET")
+     * 
+     * @param CVSoftSkills $sskill
+     * @param Request $request
+     * 
+     * @return Response
      */
-    public function add_sskill(CVSoftSkills $sskill = null, Request $request, ObjectManager $manager)
+    public function add_sskill(CVSoftSkills $sskill = null, Request $request): Response
     {
         $exist = true;
         $message = "Votre Softskill a bien été modifiée.";
@@ -201,8 +243,8 @@ class CVController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($sskill);
-            $manager->flush();
+            $this->manager->persist($sskill);
+            $this->manager->flush();
             $this->addFlash('success', $message);
             return $this->redirectToRoute('admin_cv');
         } 
@@ -215,11 +257,15 @@ class CVController extends AbstractController
 
     /**
      * @Route("/admin/delete_sskill/{id}", name="delete_sskill", methods="POST|GET")
+     * 
+     * @param CVSoftSkills $sskill
+     * 
+     * @return Response
      */
-    public function delete_sskill(CVSoftSkills $skill, ObjectManager $manager): Response
+    public function delete_sskill(CVSoftSkills $skill): Response
     {
-        $manager->remove($skill);
-        $manager->flush();
+        $this->manager->remove($skill);
+        $this->manager->flush();
         $this->addFlash('success', "Le soft skill a bien été supprimé.");
         return $this->redirectToRoute('admin_cv');
     }
@@ -228,8 +274,13 @@ class CVController extends AbstractController
      * Edit informations (avatar and other)
      * 
      * @Route("/admin/infos/{id}", name="update_infos", methods="POST|GET")
+     * 
+     * @param CVInfos $infos
+     * @param Request $request
+     * 
+     * @return Response
      */
-    public function update_infos(CVInfos $infos , Request $request, ObjectManager $manager)
+    public function update_infos(CVInfos $infos , Request $request): Response
     {
         $message = "Vos informations ont bien été modifiées.";
 
@@ -237,8 +288,8 @@ class CVController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($infos);
-            $manager->flush();
+            $this->manager->persist($infos);
+            $this->manager->flush();
             $this->addFlash('success', $message);
             return $this->redirectToRoute('admin_cv');
         } 

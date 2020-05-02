@@ -7,62 +7,60 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Classe de pagination qui extrait toute notion de calcul et de récupération de données de nos controllers
+ * Pagination class
  * 
- * Elle nécessite après instanciation qu'on lui passe l'entité sur laquelle on souhaite travailler
+ * After instanciation we MUST pass the entity selected
  */
 class PaginationService {
     /**
-     * Le nom de l'entité sur laquelle on veut effectuer une pagination
+     * Name of entity to do the pagination
      *
      * @var string
      */
     private $entityClass;
 
     /**
-     * Le nombre d'enregistrement à récupérer
+     * Number of saves
      *
      * @var integer
      */
     private $limit = 10;
 
     /**
-     * La page sur laquelle on se trouve actuellement
+     * The currentpage (generally 1)
      *
      * @var integer
      */
     private $currentPage = 1;
 
     /**
-     * Le manager de Doctrine qui nous permet notamment de trouver le repository dont on a besoin
      *
      * @var EntityManagerInterface
      */
     private $manager;
 
     /**
-     * Le moteur de template Twig qui va permettre de générer le rendu de la pagination
+     * Generate twig template
      *
      * @var Twig\Environment
      */
     private $twig;
 
     /**
-     * Le nom de la route que l'on veut utiliser pour les boutons de la navigation
+     * The name of route used to the pagination
      *
      * @var string
      */
     private $route;
 
     /**
-     * Le chemin vers le template qui contient la pagination
+     * Path of template who contain the pagination
      *
      * @var string
      */
     private $templatePath;
 
     /**
-     * Constructeur du service de pagination qui sera appelé par Symfony
      *
      * @param EntityManagerInterface $manager
      * @param Environment $twig
@@ -77,22 +75,22 @@ class PaginationService {
     }
 
     /**
-     * Permet d'afficher le rendu de la navigation au sein d'un template twig !
+     * To generate the renderer of pagination
      * 
      * @return void
      */
     public function display() {
         $this->twig->display($this->templatePath, [
-            'page' => $this->currentPage,
+            'page'  => $this->currentPage,
             'pages' => $this->getPages(),
             'route' => $this->route
         ]);
     }
 
     /**
-     * Permet de récupérer le nombre de pages qui existent sur une entité particulière
+     * To get the total of page to an entity
      * 
-     * @throws Exception si la propriété $entityClass n'est pas configurée
+     * @throws Exception if property $entityClass is undefined
      * 
      * @return int
      */
@@ -109,9 +107,9 @@ class PaginationService {
     }
 
     /**
-     * Permet de récupérer les données paginées pour une entité spécifique
+     * To get the data for the entity specified
      * 
-     * @throws Exception si la propriété $entityClass n'est pas définie
+     * @throws Exception if property $entityClass is undefined
      *
      * @return array
      */
